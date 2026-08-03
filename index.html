@@ -3,137 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mắm Ba Khía Sữa Trộn Sẵn Đặc Sản Cà Mau</title>
-    <meta name="description" content="500g dạng túi zip Đặc sản mắm ba khía sữa trộn sẵn chưa cay nam bộ. Đặt hàng ngay!">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Đặc sản mắm ba khía Cà Mau</title>
+    <link rel="stylesheet" href="tiktok.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
         <!-- Header -->
-        <header class="app-header">
-            <button class="icon-btn"><i class="fas fa-chevron-left"></i></button>
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <span>Tìm kiếm sản phẩm...</span>
-            </div>
-            <button class="icon-btn cart-header-btn" id="btnHeaderCart">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge" id="cartBadge">0</span>
-            </button>
-            <button class="icon-btn"><i class="fas fa-ellipsis-h"></i></button>
+        <header class="tk-header">
+            <button class="tk-header-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="tk-header-btn"><i class="fas fa-share"></i></button>
         </header>
 
-        <!-- Product Media Carousel -->
-        <div class="product-media" style="position: relative;">
-            <div class="carousel-container" id="imageCarousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-crop-webp:720:720.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+        <!-- Carousel -->
+        <div class="tk-carousel-wrap">
+            <div class="tk-carousel" id="tkCarousel">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-crop-webp:720:720.webp" class="zoom-img">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp" class="zoom-img">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp" class="zoom-img">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp" class="zoom-img">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp" class="zoom-img">
             </div>
-            <div class="image-indicator" id="imageIndicator" style="position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; pointer-events: none;">1/5</div>
+            <div class="tk-indicator" id="tkIndicator">1/5</div>
         </div>
 
-        <!-- Product Info -->
-        <section class="section product-info">
-            <div class="price-container" style="display: flex; align-items: baseline; margin-bottom: 8px;">
-                <span class="discount-badge-text" style="color: var(--primary-color); font-size: 20px; font-weight: 600; margin-right: 6px;">-8%</span>
-                <span class="currency" style="font-size: 16px; font-weight: 600;">₫</span>
-                <span class="amount" id="cms-product-price" style="font-size: 26px; font-weight: 700; margin-right: 8px;">54.880</span>
-                <span class="original-price" id="cms-product-oldprice" style="color: var(--text-muted); text-decoration: line-through; font-size: 14px;">59.789₫</span>
+        <!-- Info Section -->
+        <section class="tk-section">
+            <div class="tk-price-row">
+                <span class="tk-discount-tag">-8%</span>
+                <span class="tk-currency">₫</span>
+                <span class="tk-price-main">54.880</span>
+                <span class="tk-price-old">59.789₫</span>
             </div>
-            
-            <div class="shipping-info" style="font-size: 14px; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 6px;">
-                <i class="fas fa-truck" style="font-size: 16px;"></i> 71.600₫ phí vận chuyển cho đơn hàng này
+            <div class="tk-shipping-row">
+                <i class="fas fa-truck"></i>
+                <span>71.600₫ shipping on this order</span>
             </div>
-            
-            <h1 class="product-title" id="cms-product-name" style="font-size: 16px; font-weight: 600; line-height: 1.4; margin-bottom: 8px;">
+            <h1 class="tk-title" id="cms-product-name">
                 500g dạng túi zip Đặc sản mắm ba khía sữa trộn sẵn chưa cay nam bộ
             </h1>
-            
-            <div class="shop-info" style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">
-                Được bán bởi Đặc sản mắm ba khía cà mau 79
+            <div class="tk-shop-name">
+                Sold by Đặc sản mắm ba khía cà mau 79
             </div>
-            
-            <div class="stats-container" style="font-size: 13px; color: var(--text-muted); margin-bottom: 0;">
-                <span style="font-weight: 700; color: #000;">4.3 <i class="fas fa-star" style="font-size: 10px;"></i></span>
-                <span style="margin-left: 4px;">(5.7K)</span>
-                <span style="margin: 0 6px; color: #ddd;">|</span>
-                <span>112.6K Đã bán</span>
+            <div class="tk-stats">
+                <span class="tk-stats-rating">4.3 <i class="fas fa-star"></i></span>
+                <span style="margin-left:4px;">(5.7K)</span>
+                <span class="tk-divider">|</span>
+                <span>112.6K sold</span>
             </div>
         </section>
 
-        <!-- USPs (Lý do nên mua) -->
-        <section class="section usps">
-            <div class="usp-list">
-                <div class="usp-item">
-                    <i class="fas fa-check-circle text-primary"></i>
-                    <span>Chuẩn vị gia truyền</span>
-                </div>
-                <div class="usp-item">
-                    <i class="fas fa-shield-alt text-primary"></i>
-                    <span>Túi Zip an toàn</span>
-                </div>
-                <div class="usp-item">
-                    <i class="fas fa-bolt text-primary"></i>
-                    <span>Ăn liền tiện lợi</span>
-                </div>
+        <!-- Variants Trigger -->
+        <section class="tk-section tk-option-selector" id="openVariantModal">
+            <div>
+                <span class="tk-option-label">Thông số:</span>
+                <span class="tk-option-value" style="margin-left: 8px;">Mặc định</span>
             </div>
+            <i class="fas fa-chevron-right" style="color:var(--tk-text-light); font-size: 12px;"></i>
         </section>
 
-        <!-- Vouchers -->
-        <section class="section vouchers">
-            <div class="section-header">
-                <span class="label">Voucher của Shop</span>
-            </div>
-            <div class="voucher-list">
-                <div class="voucher-item">
-                    <div class="v-info">Giảm 15k<br><small>Đơn từ 150k</small></div>
-                    <button class="v-btn save-voucher-btn" data-id="v1" data-discount="15000" data-min="150000" data-text="Giảm 15k">Lưu</button>
-                </div>
-                <div class="voucher-item">
-                    <div class="v-info">Giảm 30k<br><small>Đơn từ 300k</small></div>
-                    <button class="v-btn save-voucher-btn" data-id="v2" data-discount="30000" data-min="300000" data-text="Giảm 30k">Lưu</button>
-                </div>
-                <div class="voucher-item freeship">
-                    <div class="v-info">Freeship<br><small>Mọi đơn</small></div>
-                    <button class="v-btn save-voucher-btn" data-id="v3" data-discount="20000" data-min="0" data-text="Freeship 20k">Lưu</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Video Placeholder -->
-        <section class="section product-video">
-             <div class="video-container">
-                 <div class="video-overlay">
-                     <i class="fas fa-play-circle play-icon"></i>
-                     <p>Xem độ ngon khó cưỡng!</p>
-                 </div>
-                 <img src="assets/images/close_up.jpg" alt="Video thumbnail" class="video-thumb">
-             </div>
-        </section>
-
-        <!-- Product Details -->
-        <section class="section product-details">
-            <h2 class="section-title">Chi tiết sản phẩm</h2>
-            <div class="detail-grid">
-                <div class="detail-row">
-                    <span class="detail-label">Thương hiệu</span>
-                    <span class="detail-value">Đặc Sản Cà Mau 79</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Xuất xứ</span>
-                    <span class="detail-value">Việt Nam</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Gửi từ</span>
-                    <span class="detail-value">Cà Mau</span>
-                </div>
-            </div>
-            <div class="description" style="line-height: 1.6; font-size: 14px; color: #333;">
+        <!-- Description Section -->
+        <section class="tk-section">
+            <h2 class="tk-desc-title">Mô tả sản phẩm</h2>
+            <div class="tk-desc-content" id="cms-product-desc">
                 <p><strong>Xoài trộn ba khía đưa cơm ngày mưa</strong></p>
                 <p>Mắm ba khía là một trong những món ăn kích thích vị giác, được cả nhà tôi rất ưa thích. Đặc biệt, mắm ba khía trộn xoài là món ăn ngon không thể tả.</p>
                 <p><strong>Nguyên liệu:</strong><br>
@@ -147,229 +80,186 @@
                 - Cho vào đĩa đựng ba khía 1 muỗng canh đường, nước cốt của 1 trái chanh. Cho tiếp phần tỏi, ớt băm vào và đảo đều lên.<br>
                 - Sau khi đảo xong, để 15 phút cho ngấm gia vị, rồi cho xoài vào chung với ba khía để trộn cho ngấm vào nhau. Có thể trang trí thêm cà chua, rau húng cho bắt mắt.</p>
                 <p>Ba khía có vị mặn, ngọt đặc trưng, kết hợp với vị chua của xoài, cay của ớt và mùi thơm của tỏi khiến bạn say mê lúc nào không hay.</p>
-            </div>
-            <div class="desc-images">
-                 <img id="cms-product-desc-img" src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp" alt="Chi tiết sản phẩm" class="desc-img">
-                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp" alt="Chi tiết sản phẩm" class="desc-img" style="margin-top: 10px;">
-                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp" alt="Chi tiết sản phẩm" class="desc-img" style="margin-top: 10px;">
-                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp" alt="Chi tiết sản phẩm" class="desc-img" style="margin-top: 10px;">
-                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/31276397efe24c469ae0c4431c09a2db~tplv-o3syd03w52-resize-webp:800:800.webp" alt="Chi tiết sản phẩm" class="desc-img" style="margin-top: 10px;">
+                
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/31276397efe24c469ae0c4431c09a2db~tplv-o3syd03w52-resize-webp:800:800.webp" class="zoom-img">
             </div>
         </section>
-
-        <!-- Reviews -->
-        <section class="section reviews">
-            <div class="section-header" style="margin-bottom: 15px;">
-                <h2 class="section-title" style="font-size: 15px; margin-bottom:0;">Đánh giá khách hàng (2410)</h2>
-                <div class="view-all">
-                    <span>Xem tất cả</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="review-overview">
-                <div class="review-score">4.9</div>
-                <div class="review-stars-wrap">
-                    <div class="review-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <div class="review-count">2.4k đánh giá</div>
-                </div>
-            </div>
-
-            <div class="review-tags">
-                <span class="review-tag">Sản phẩm tuyệt vời (840)</span>
-                <span class="review-tag">Giao hàng nhanh (420)</span>
-                <span class="review-tag">Đóng gói cẩn thận (310)</span>
-                <span class="review-tag">Vị rất ngon (250)</span>
-            </div>
-            
-            <div class="review-item">
-                <div class="reviewer-info">
-                    <div class="avatar">H</div>
-                    <div class="name-rating">
-                        <div class="name">hoangnam.99</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-text">Ba khía ngon lắm shop ơi, vị chua ngọt mặn vừa vặn, nhiều gạch son ăn tốn cơm cực kỳ. Đóng gói túi zip siêu tiện!</div>
-            </div>
-            
-            <div class="review-item">
-                <div class="reviewer-info">
-                    <div class="avatar">T</div>
-                    <div class="name-rating">
-                        <div class="name">trangthu_nguyen</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-text">Giao hàng hỏa tốc trong đêm luôn. Mình mua loại cay ăn cực kỳ đã. Mắm sạch sẽ, hũ 500g mà ăn 1 tuần mới hết.</div>
-            </div>
-        </section>
-
-        <!-- Space for bottom bar -->
-        <div style="height: 80px;"></div>
 
         <!-- Bottom Action Bar -->
-        <div class="bottom-bar" style="padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; z-index: 100;">
-            <div class="action-icons" style="display: flex; gap: 15px; margin-right: 15px;">
-                <div class="action-icon" style="display: flex; flex-direction: column; align-items: center; color: #333;">
-                    <i class="fas fa-store" style="font-size: 20px; margin-bottom: 4px;"></i>
-                    <span style="font-size: 10px;">Cửa hàng</span>
-                </div>
-                <div class="action-icon" style="display: flex; flex-direction: column; align-items: center; color: #333;">
-                    <i class="fas fa-comment-dots" style="font-size: 20px; margin-bottom: 4px;"></i>
-                    <span style="font-size: 10px;">Chat</span>
-                </div>
+        <div class="tk-bottom-bar">
+            <div class="tk-icon-group">
+                <button class="tk-icon-btn">
+                    <i class="fas fa-store"></i>
+                    <span>Cửa hàng</span>
+                </button>
+                <button class="tk-icon-btn">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Chat</span>
+                </button>
             </div>
-            <div class="action-buttons" style="flex: 1;">
-                <button class="btn-buy" id="btnBuyNow" style="width: 100%; border-radius: 40px; background-color: var(--primary-color); color: white; padding: 12px 0; font-weight: 600; font-size: 16px; border: none;">Mua ngay</button>
+            <button class="tk-buy-btn" id="btnBuyNowMain">Buy now</button>
+        </div>
+
+        <!-- Order / Variant Modal -->
+        <div class="tk-modal-overlay" id="orderModal">
+            <div class="tk-modal-content">
+                <button class="tk-modal-close" id="closeOrderModal">&times;</button>
+                
+                <div class="tk-modal-header">
+                    <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-crop-webp:720:720.webp" class="tk-modal-img">
+                    <div class="tk-modal-price">
+                        <span style="font-size: 14px;">₫</span><span id="modalPriceVal">54.880</span>
+                    </div>
+                </div>
+
+                <div class="tk-variant-group">
+                    <div class="tk-variant-title">Thông số</div>
+                    <div class="tk-variant-options">
+                        <button class="tk-variant-btn active">Mặc định (500g)</button>
+                    </div>
+                </div>
+
+                <div class="tk-qty-row">
+                    <div class="tk-qty-title">Quantity:</div>
+                    <div class="tk-qty-selector">
+                        <button class="tk-qty-btn" id="tkBtnMinus">-</button>
+                        <input type="number" class="tk-qty-input" id="tkQtyInput" value="1" readonly>
+                        <button class="tk-qty-btn" id="tkBtnPlus">+</button>
+                    </div>
+                </div>
+
+                <!-- Fake Order Form Details Inside Modal for seamless experience -->
+                <div id="tkOrderForm" style="display:none; margin-bottom: 20px;">
+                    <div style="font-weight: 600; margin-bottom: 10px;">Địa chỉ nhận hàng</div>
+                    <input type="text" id="orderName" placeholder="Họ và tên" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 4px;">
+                    <input type="text" id="orderPhone" placeholder="Số điện thoại" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 4px;">
+                    <input type="text" id="orderAddress" placeholder="Địa chỉ chi tiết" style="width:100%; padding: 10px; border: 1px solid #eee; border-radius: 4px;">
+                </div>
+
+                <button class="tk-modal-buy-btn" id="btnConfirmBuy">Buy now</button>
             </div>
         </div>
 
         <!-- Zoom Modal -->
-        <div class="image-zoom-modal" id="imageZoomModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;">
+        <div class="image-zoom-modal" id="imageZoomModal">
             <span id="closeZoom" style="position:absolute; top:20px; right:20px; color:white; font-size:36px; cursor:pointer;">&times;</span>
             <img id="zoomedImg" src="" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
-
-        <!-- Order Modal -->
-        <div class="modal-overlay" id="orderModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img id="cms-modal-thumb" src="assets/images/premium_jar.jpg" alt="Thumbnail" class="modal-thumb">
-                    <div class="modal-price-info">
-                        <div class="modal-price text-primary">₫<span id="modalPrice">125.000</span></div>
-                        <div class="modal-stock">Kho: 985</div>
-                        <div class="modal-selected-variant" id="selectedVariantDisplay">Hũ 500g, Không cay</div>
-                    </div>
-                    <button class="close-btn" id="btnCloseModal"><i class="fas fa-times"></i></button>
-                </div>
-                
-                <div class="modal-body" id="modalFormStep">
-                    <!-- Phân loại sản phẩm -->
-                    <div class="form-group">
-                        <label>Khối lượng</label>
-                        <div class="option-group" id="weightOptions">
-                            <button class="option-btn active" data-price="125000">Hũ 500g</button>
-                            <button class="option-btn" data-price="240000">Hũ 1Kg</button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Độ cay</label>
-                        <div class="option-group" id="spiceOptions">
-                            <button class="option-btn active">Không cay</button>
-                            <button class="option-btn">Cay vừa</button>
-                            <button class="option-btn">Siêu cay</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Số lượng</label>
-                        <div class="quantity-selector">
-                            <button class="qty-btn" id="btnMinus"><i class="fas fa-minus"></i></button>
-                            <input type="number" id="qtyInput" value="1" min="1" max="99">
-                            <button class="qty-btn" id="btnPlus"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- Voucher Section in Checkout -->
-                    <div class="form-group voucher-checkout-box">
-                        <div class="voucher-checkout-header">
-                            <label><i class="fas fa-ticket-alt" style="color:var(--primary-color);"></i> Voucher của Shop</label>
-                            <span id="checkoutAppliedVoucherText">Chưa chọn</span>
-                        </div>
-                        <div id="checkoutSavedVouchers" class="checkout-saved-vouchers">
-                            <p class="empty-voucher-text">Bạn chưa lưu voucher nào.</p>
-                        </div>
-                    </div>
-
-                    <h3 class="form-title">Thông tin giao hàng</h3>
-                    <div class="form-group">
-                        <input type="text" id="cusName" class="form-input" placeholder="Họ và tên người nhận" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="cusPhone" class="form-input" placeholder="Số điện thoại" required>
-                        <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ!</div>
-                    </div>
-                    
-                    <!-- API Address Selectors -->
-                    <div class="form-group address-group">
-                        <select id="cusProvince" class="form-input" required>
-                            <option value="">Chọn Tỉnh/Thành phố</option>
-                        </select>
-                        <select id="cusDistrict" class="form-input" required disabled>
-                            <option value="">Chọn Quận/Huyện</option>
-                        </select>
-                        <select id="cusWard" class="form-input" required disabled>
-                            <option value="">Chọn Phường/Xã</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường chi tiết..." required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú cho shop (không bắt buộc)">
-                    </div>
-                </div>
-
-                <!-- Confirmation Step -->
-                <div class="modal-body" id="modalConfirmStep" style="display:none;">
-                    <div class="confirm-alert">
-                        <i class="fas fa-info-circle"></i> Vui lòng kiểm tra kỹ thông tin trước khi đặt hàng.
-                    </div>
-                    <h3 class="form-title" style="margin-top:0;">Xác nhận đơn hàng</h3>
-                    <div class="confirm-summary">
-                        <p><strong>Sản phẩm:</strong> <span id="confProduct"></span> x<span id="confQty"></span></p>
-                        <p><strong>Người nhận:</strong> <span id="confName"></span> - <span id="confPhone"></span></p>
-                        <p><strong>Địa chỉ:</strong> <span id="confAddress"></span></p>
-                        <p><strong>Ghi chú:</strong> <span id="confNote"></span></p>
-                        
-                        <div class="price-breakdown">
-                            <div class="breakdown-row">
-                                <span>Tạm tính:</span>
-                                <span>₫<span id="confSubTotal"></span></span>
-                            </div>
-                            <div class="breakdown-row text-primary" id="confDiscountRow" style="display:none;">
-                                <span>Voucher giảm giá:</span>
-                                <span>- ₫<span id="confDiscount">0</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal-footer">
-                    <div class="total-section">
-                        <span>Tổng thanh toán:</span>
-                        <span class="total-price">₫<span id="totalPrice">125.000</span></span>
-                    </div>
-                    <button class="btn-submit" id="btnNextStep">Tiếp tục</button>
-                    <button class="btn-submit" id="btnSubmitOrder" style="display:none;">Xác nhận Đặt Hàng</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Custom Alert Popup -->
-        <div class="custom-alert-overlay" id="customAlert">
-            <div class="custom-alert-box">
-                <div class="custom-alert-icon"><i class="fas fa-exclamation-circle"></i></div>
-                <div class="custom-alert-msg" id="customAlertMsg">Lỗi</div>
-                <button class="custom-alert-btn" id="customAlertBtn">Đóng</button>
-            </div>
-        </div>
-
-        <!-- Success Toast -->
-        <div class="toast" id="successToast">
-            <i class="fas fa-check-circle"></i> <span id="toastMsg">Thành công!</span>
-        </div>
     </div>
-    <script src="script.js"></script>
-    <script src="./editor.js"></script>
+
+    <!-- Script for TikTok UI logic -->
+    <script>
+        // Carousel Indicator
+        const carousel = document.getElementById('tkCarousel');
+        const indicator = document.getElementById('tkIndicator');
+        if (carousel && indicator) {
+            carousel.addEventListener('scroll', () => {
+                const index = Math.round(carousel.scrollLeft / carousel.offsetWidth) + 1;
+                indicator.textContent = `${index}/${carousel.children.length}`;
+            });
+        }
+
+        // Zoom Modal
+        const zoomModal = document.getElementById('imageZoomModal');
+        const zoomedImg = document.getElementById('zoomedImg');
+        const closeZoom = document.getElementById('closeZoom');
+        
+        document.querySelectorAll('.zoom-img').forEach(img => {
+            img.addEventListener('click', function() {
+                zoomedImg.src = this.src;
+                zoomModal.style.display = 'flex';
+            });
+        });
+        if (closeZoom) closeZoom.addEventListener('click', () => zoomModal.style.display = 'none');
+        if (zoomModal) zoomModal.addEventListener('click', (e) => {
+            if(e.target === zoomModal) zoomModal.style.display = 'none';
+        });
+
+        // Modals
+        const orderModal = document.getElementById('orderModal');
+        const openVariantModal = document.getElementById('openVariantModal');
+        const btnBuyNowMain = document.getElementById('btnBuyNowMain');
+        const closeOrderModal = document.getElementById('closeOrderModal');
+        const tkOrderForm = document.getElementById('tkOrderForm');
+        const btnConfirmBuy = document.getElementById('btnConfirmBuy');
+        
+        let isFormVisible = false;
+
+        const openModal = () => {
+            orderModal.classList.add('active');
+            isFormVisible = false;
+            tkOrderForm.style.display = 'none';
+            btnConfirmBuy.textContent = "Buy now";
+        };
+
+        openVariantModal.addEventListener('click', openModal);
+        btnBuyNowMain.addEventListener('click', openModal);
+
+        closeOrderModal.addEventListener('click', () => {
+            orderModal.classList.remove('active');
+        });
+
+        orderModal.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.classList.remove('active');
+            }
+        });
+
+        // Quantity Selector
+        const tkQtyInput = document.getElementById('tkQtyInput');
+        const tkBtnMinus = document.getElementById('tkBtnMinus');
+        const tkBtnPlus = document.getElementById('tkBtnPlus');
+        const modalPriceVal = document.getElementById('modalPriceVal');
+        const basePrice = 54880;
+
+        const updatePrice = () => {
+            const qty = parseInt(tkQtyInput.value);
+            const total = basePrice * qty;
+            modalPriceVal.textContent = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        };
+
+        tkBtnMinus.addEventListener('click', () => {
+            let qty = parseInt(tkQtyInput.value);
+            if (qty > 1) {
+                tkQtyInput.value = qty - 1;
+                updatePrice();
+            }
+        });
+
+        tkBtnPlus.addEventListener('click', () => {
+            let qty = parseInt(tkQtyInput.value);
+            tkQtyInput.value = qty + 1;
+            updatePrice();
+        });
+
+        // Confirm Buy 
+        btnConfirmBuy.addEventListener('click', () => {
+            if (!isFormVisible) {
+                // Show form
+                isFormVisible = true;
+                tkOrderForm.style.display = 'block';
+                btnConfirmBuy.textContent = "Xác nhận đặt hàng";
+            } else {
+                // Submit order
+                const name = document.getElementById('orderName').value;
+                const phone = document.getElementById('orderPhone').value;
+                const address = document.getElementById('orderAddress').value;
+                
+                if (!name || !phone || !address) {
+                    alert("Vui lòng điền đủ thông tin giao hàng!");
+                    return;
+                }
+
+                btnConfirmBuy.textContent = "Đang xử lý...";
+                setTimeout(() => {
+                    alert("Đặt hàng thành công!");
+                    orderModal.classList.remove('active');
+                    btnConfirmBuy.textContent = "Buy now";
+                    tkOrderForm.style.display = 'none';
+                    isFormVisible = false;
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
