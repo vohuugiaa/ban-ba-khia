@@ -240,6 +240,14 @@ body {
 }
 .rating i { color: #ffb800; margin-right: 4px; font-size: 12px;}
 .divider { color: var(--border-color); }
+.fs-xtra-badge {
+    background: linear-gradient(90deg, #00c675, #009352);
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
 
 /* USPs */
 .usps {
@@ -286,8 +294,15 @@ body {
     min-width: 160px;
     overflow: hidden;
 }
-.voucher-item.freeship {
-    background: #e6f6ec;
+.voucher-item.freeship-xtra {
+    background: linear-gradient(135deg, #00c675 0%, #009352 100%);
+    border: none;
+    position: relative;
+}
+.voucher-item.freeship-xtra .v-icon-left {
+    padding-left: 12px;
+    font-size: 20px;
+    color: white;
 }
 .v-info {
     flex: 1;
@@ -296,7 +311,12 @@ body {
     font-weight: 700;
     color: var(--primary-color);
 }
-.voucher-item.freeship .v-info { color: #00b14f; }
+.voucher-item.freeship-xtra .v-info { color: white; }
+.voucher-item.freeship-xtra .v-info small { color: rgba(255,255,255,0.9); }
+.voucher-item.freeship-xtra .v-btn {
+    background: white;
+    color: #009352;
+}
 .v-info small {
     font-size: 10px;
     font-weight: 400;
