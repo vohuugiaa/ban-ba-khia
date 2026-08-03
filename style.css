@@ -1,16 +1,22 @@
 :root {
-    --primary-color: #fe2c55;
-    --text-main: #161823;
-    --text-muted: rgba(22, 24, 35, 0.5);
-    --bg-main: #f8f8f8;
+    --primary-color: #A63A29; /* Terracotta / Deep Red */
+    --gold-accent: #C5A059;   /* Premium Gold */
+    --text-main: #2C2C2C;     /* Softer black for elegance */
+    --text-muted: rgba(44, 44, 44, 0.5);
+    --bg-main: #FAFAFA;       /* Clean Off-white */
     --font-family: 'Inter', sans-serif;
+    --font-heading: 'Playfair Display', serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     font-family: var(--font-family);
-    background-color: #e5e5e5;
+    background-color: #f0f0f0;
     color: var(--text-main);
+    line-height: 1.6;
+}
+h1, h2, h3, .product-title {
+    font-family: var(--font-heading);
 }
 a { text-decoration: none; color: inherit; }
 

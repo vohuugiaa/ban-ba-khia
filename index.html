@@ -3,120 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mắm Khía Cà Mau 79 - Đặc Sản Miền Tây Chính Gốc</title>
-    <meta name="description" content="Chuyên cung cấp các loại đặc sản Cà Mau: Mắm ba khía sữa, khô cá lóc, mắm tôm chà chất lượng cao.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Mắm Ba Khía Sữa Trộn Sẵn Đặc Sản Cà Mau</title>
+    <meta name="description" content="500g dạng túi zip Đặc sản mắm ba khía sữa trộn sẵn chưa cay nam bộ. Đặt hàng ngay!">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
         <!-- Header -->
-        <header class="home-header">
-            <div class="logo">Mắm Khía Cà Mau 79</div>
-            <button class="icon-btn"><i class="fas fa-bars"></i></button>
+        <header class="app-header">
+            <button class="icon-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <span>Tìm kiếm sản phẩm...</span>
+            </div>
+            <button class="icon-btn cart-header-btn" id="btnHeaderCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+            <button class="icon-btn"><i class="fas fa-ellipsis-h"></i></button>
         </header>
 
-        <!-- Hero Banner -->
-        <section class="hero-banner">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>ĐẶC SẢN CHÍNH GỐC<br>MIỀN TÂY</h1>
-                <p>Hương vị truyền thống - Đậm đà khó quên</p>
-                <a href="#products" class="btn-primary">Mua sắm ngay</a>
-            </div>
-        </section>
+        <!-- Product Media -->
+        <div class="product-media">
+            <img id="cms-product-img" src="assets/images/premium_jar.jpg" alt="Mắm Ba Khía Sữa" class="main-image" style="height:400px; object-fit:cover;">
+            <div class="image-indicator">1/5</div>
+        </div>
 
-        <!-- Categories / USPs -->
-        <section class="home-usps">
-            <div class="usp-box">
-                <i class="fas fa-certificate text-primary"></i>
-                <p>100% Nguyên chất</p>
-            </div>
-            <div class="usp-box">
-                <i class="fas fa-truck text-primary"></i>
-                <p>Giao hàng toàn quốc</p>
-            </div>
-            <div class="usp-box">
-                <i class="fas fa-leaf text-primary"></i>
-                <p>An toàn vệ sinh</p>
-            </div>
-        </section>
-
-        <!-- Product List -->
-        <section id="products" class="section product-section">
-            <div class="section-title">
-                <h2>Sản phẩm nổi bật</h2>
-                <a href="#" class="view-all">Xem tất cả <i class="fas fa-chevron-right"></i></a>
+        <!-- Product Info -->
+        <section class="section product-info">
+            <div class="price-container">
+                <div class="current-price">
+                    <span class="currency">₫</span><span class="amount" id="cms-product-price">125.000</span>
+                </div>
+                <div class="original-price" id="cms-product-oldprice">₫150.000</div>
+                <div class="discount-badge">-16%</div>
             </div>
             
-            <div class="product-grid">
-                <!-- Product 1: The actual product we built -->
-                <a href="san-pham/mam-ba-khia-sua/index.html" class="product-card">
-                    <div class="badge-hot">Bán chạy</div>
-                    <img id="cms-home-img" src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Mắm Ba Khía Sữa" class="p-img">
-                    <div class="p-info">
-                        <h3 id="cms-home-name" class="p-name">Mắm Ba Khía Sữa Trộn Sẵn Nam Bộ</h3>
-                        <div class="p-price">
-                            <span id="cms-home-price" class="price-current">125.000₫</span>
-                            <span id="cms-home-oldprice" class="price-old">150.000₫</span>
-                        </div>
-                        <div class="p-rating">
-                            <i class="fas fa-star"></i> 4.9 (2.4k đã bán)
-                        </div>
-                    </div>
-                </a>
+            <h1 class="product-title" id="cms-product-name">
+                <span class="mall-badge">Mall</span> 
+                Đặc sản mắm ba khía sữa trộn sẵn gia vị chuẩn Nam Bộ siêu tốn cơm
+            </h1>
+            
+            <div class="stats-container">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (2.4k đánh giá)</span>
+                </div>
+                <div class="divider">|</div>
+                <div class="sold">Đã bán 8.9k</div>
+            </div>
+        </section>
 
-                <!-- Product 2 (Placeholder) -->
-                <a href="#" class="product-card">
-                    <img src="https://images.unsplash.com/photo-1594222046835-15a0de73ce2a?auto=format&fit=crop&q=80&w=400" alt="Khô Cá Lóc" class="p-img">
-                    <div class="p-info">
-                        <h3 class="p-name">Khô Cá Lóc Đồng Loại 1 (500g)</h3>
-                        <div class="p-price">
-                            <span class="price-current">180.000₫</span>
-                        </div>
-                        <div class="p-rating">
-                            <i class="fas fa-star"></i> 4.8 (1.1k đã bán)
+        <!-- USPs (Lý do nên mua) -->
+        <section class="section usps">
+            <div class="usp-list">
+                <div class="usp-item">
+                    <i class="fas fa-check-circle text-primary"></i>
+                    <span>Chuẩn vị gia truyền</span>
+                </div>
+                <div class="usp-item">
+                    <i class="fas fa-shield-alt text-primary"></i>
+                    <span>Túi Zip an toàn</span>
+                </div>
+                <div class="usp-item">
+                    <i class="fas fa-bolt text-primary"></i>
+                    <span>Ăn liền tiện lợi</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vouchers -->
+        <section class="section vouchers">
+            <div class="section-header">
+                <span class="label">Voucher của Shop</span>
+            </div>
+            <div class="voucher-list">
+                <div class="voucher-item">
+                    <div class="v-info">Giảm 15k<br><small>Đơn từ 150k</small></div>
+                    <button class="v-btn save-voucher-btn" data-id="v1" data-discount="15000" data-min="150000" data-text="Giảm 15k">Lưu</button>
+                </div>
+                <div class="voucher-item">
+                    <div class="v-info">Giảm 30k<br><small>Đơn từ 300k</small></div>
+                    <button class="v-btn save-voucher-btn" data-id="v2" data-discount="30000" data-min="300000" data-text="Giảm 30k">Lưu</button>
+                </div>
+                <div class="voucher-item freeship">
+                    <div class="v-info">Freeship<br><small>Mọi đơn</small></div>
+                    <button class="v-btn save-voucher-btn" data-id="v3" data-discount="20000" data-min="0" data-text="Freeship 20k">Lưu</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Placeholder -->
+        <section class="section product-video">
+             <div class="video-container">
+                 <div class="video-overlay">
+                     <i class="fas fa-play-circle play-icon"></i>
+                     <p>Xem độ ngon khó cưỡng!</p>
+                 </div>
+                 <img src="assets/images/close_up.jpg" alt="Video thumbnail" class="video-thumb">
+             </div>
+        </section>
+
+        <!-- Product Details -->
+        <section class="section product-details">
+            <h2 class="section-title">Chi tiết sản phẩm</h2>
+            <div class="detail-grid">
+                <div class="detail-row">
+                    <span class="detail-label">Thương hiệu</span>
+                    <span class="detail-value">Đặc Sản Cà Mau 79</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Xuất xứ</span>
+                    <span class="detail-value">Việt Nam</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Gửi từ</span>
+                    <span class="detail-value">Cà Mau</span>
+                </div>
+            </div>
+            <div class="description">
+                <p>🦀 <strong>MẮM BA KHÍA SỮA TRỘN SẴN - ĐẶC SẢN MIỀN TÂY CHÍNH GỐC</strong> 🦀</p>
+                <p>✨ Ba khía sữa được tuyển chọn kỹ lưỡng, thịt chắc, gạch son béo ngậy. Được muối theo công thức gia truyền, vị mặn mà vừa phải, không quá gắt.</p>
+                <p>✨ Đã được trộn sẵn gia vị: tỏi, ớt, chanh, đường... chua chua ngọt ngọt, cay nồng hấp dẫn. Khách mua về chỉ việc mở hộp là ăn ngay, cực kỳ tiện lợi.</p>
+                <p>🔥 <strong>Đặc biệt:</strong> Đóng gói dạng túi zip cao cấp, sạch sẽ, an toàn vệ sinh thực phẩm, dễ dàng bảo quản sau khi sử dụng.</p>
+                <p>🍚 Ăn kèm với cơm nóng, bún, hoặc làm gỏi đu đủ đều ngon tuyệt cú mèo!</p>
+            </div>
+            <div class="desc-images">
+                 <img id="cms-product-desc-img" src="assets/images/close_up.jpg" alt="Chi tiết sản phẩm" class="desc-img">
+            </div>
+        </section>
+
+        <!-- Reviews -->
+        <section class="section reviews">
+            <div class="section-header">
+                <h2 class="section-title">Đánh giá sản phẩm (2410)</h2>
+                <div class="view-all">
+                    <span>Xem tất cả</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">H</div>
+                    <div class="name-rating">
+                        <div class="name">hoangnam.99</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                     </div>
-                </a>
+                </div>
+                <div class="review-text">Ba khía ngon lắm shop ơi, vị chua ngọt mặn vừa vặn, nhiều gạch son ăn tốn cơm cực kỳ. Sẽ ủng hộ tiếp!</div>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">T</div>
+                    <div class="name-rating">
+                        <div class="name">trangthu_nguyen</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-text">Đóng gói túi zip rất tiện, không bị hôi tủ lạnh. Mình chọn loại cay vừa ăn rất cuốn, mắm thơm phức luôn.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">M</div>
+                    <div class="name-rating">
+                        <div class="name">minhminh_95</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-text">Trời mưa lạnh lạnh làm bát cơm nóng với mắm này là chuẩn bài. Khuyên mọi người nên mua hũ 1kg cho rẻ.</div>
+            </div>
+        </section>
+
+        <!-- Space for bottom bar -->
+        <div style="height: 80px;"></div>
+
+        <!-- Bottom Action Bar -->
+        <div class="bottom-bar">
+            <div class="action-icons">
+                <div class="action-icon">
+                    <i class="fas fa-store"></i>
+                    <span>Cửa hàng</span>
+                </div>
+                <div class="action-icon">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Chat</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-cart" id="btnAddCart">Thêm vào giỏ</button>
+                <button class="btn-buy" id="btnBuyNow">Mua ngay</button>
+            </div>
+        </div>
+
+        <!-- Order Modal -->
+        <div class="modal-overlay" id="orderModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img id="cms-modal-thumb" src="assets/images/premium_jar.jpg" alt="Thumbnail" class="modal-thumb">
+                    <div class="modal-price-info">
+                        <div class="modal-price text-primary">₫<span id="modalPrice">125.000</span></div>
+                        <div class="modal-stock">Kho: 985</div>
+                        <div class="modal-selected-variant" id="selectedVariantDisplay">Hũ 500g, Không cay</div>
+                    </div>
+                    <button class="close-btn" id="btnCloseModal"><i class="fas fa-times"></i></button>
+                </div>
                 
-                <!-- Product 3 (Placeholder) -->
-                <a href="#" class="product-card">
-                    <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&q=80&w=400" alt="Mắm Tôm Chà" class="p-img">
-                    <div class="p-info">
-                        <h3 class="p-name">Mắm Tôm Chà Gò Công Hũ Thủy Tinh</h3>
-                        <div class="p-price">
-                            <span class="price-current">95.000₫</span>
-                        </div>
-                        <div class="p-rating">
-                            <i class="fas fa-star"></i> 4.9 (800 đã bán)
+                <div class="modal-body" id="modalFormStep">
+                    <!-- Phân loại sản phẩm -->
+                    <div class="form-group">
+                        <label>Khối lượng</label>
+                        <div class="option-group" id="weightOptions">
+                            <button class="option-btn active" data-price="125000">Hũ 500g</button>
+                            <button class="option-btn" data-price="240000">Hũ 1Kg</button>
                         </div>
                     </div>
-                </a>
-            </div>
-        </section>
+                    
+                    <div class="form-group">
+                        <label>Độ cay</label>
+                        <div class="option-group" id="spiceOptions">
+                            <button class="option-btn active">Không cay</button>
+                            <button class="option-btn">Cay vừa</button>
+                            <button class="option-btn">Siêu cay</button>
+                        </div>
+                    </div>
 
-        <!-- About Us -->
-        <section class="section about-section">
-            <h2>Về Mắm Khía Cà Mau 79</h2>
-            <p>Chúng tôi tự hào mang đến những hương vị đặc sản miền Tây sông nước chuẩn vị nhất. Mỗi hũ mắm, mỗi ký khô đều được làm từ tâm huyết của những người con vùng đất mũi Cà Mau, đảm bảo vệ sinh an toàn thực phẩm tuyệt đối.</p>
-        </section>
+                    <div class="form-group">
+                        <label>Số lượng</label>
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="btnMinus"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="qtyInput" value="1" min="1" max="99">
+                            <button class="qty-btn" id="btnPlus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
 
-        <!-- Footer -->
-        <footer class="app-footer">
-            <div class="footer-links">
-                <a href="#">Trang chủ</a> | 
-                <a href="#">Sản phẩm</a> | 
-                <a href="#">Liên hệ</a>
+                    <!-- Voucher Section in Checkout -->
+                    <div class="form-group voucher-checkout-box">
+                        <div class="voucher-checkout-header">
+                            <label><i class="fas fa-ticket-alt" style="color:var(--primary-color);"></i> Voucher của Shop</label>
+                            <span id="checkoutAppliedVoucherText">Chưa chọn</span>
+                        </div>
+                        <div id="checkoutSavedVouchers" class="checkout-saved-vouchers">
+                            <p class="empty-voucher-text">Bạn chưa lưu voucher nào.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="form-title">Thông tin giao hàng</h3>
+                    <div class="form-group">
+                        <input type="text" id="cusName" class="form-input" placeholder="Họ và tên người nhận" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="cusPhone" class="form-input" placeholder="Số điện thoại" required>
+                        <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ!</div>
+                    </div>
+                    
+                    <!-- API Address Selectors -->
+                    <div class="form-group address-group">
+                        <select id="cusProvince" class="form-input" required>
+                            <option value="">Chọn Tỉnh/Thành phố</option>
+                        </select>
+                        <select id="cusDistrict" class="form-input" required disabled>
+                            <option value="">Chọn Quận/Huyện</option>
+                        </select>
+                        <select id="cusWard" class="form-input" required disabled>
+                            <option value="">Chọn Phường/Xã</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường chi tiết..." required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú cho shop (không bắt buộc)">
+                    </div>
+                </div>
+
+                <!-- Confirmation Step -->
+                <div class="modal-body" id="modalConfirmStep" style="display:none;">
+                    <div class="confirm-alert">
+                        <i class="fas fa-info-circle"></i> Vui lòng kiểm tra kỹ thông tin trước khi đặt hàng.
+                    </div>
+                    <h3 class="form-title" style="margin-top:0;">Xác nhận đơn hàng</h3>
+                    <div class="confirm-summary">
+                        <p><strong>Sản phẩm:</strong> <span id="confProduct"></span> x<span id="confQty"></span></p>
+                        <p><strong>Người nhận:</strong> <span id="confName"></span> - <span id="confPhone"></span></p>
+                        <p><strong>Địa chỉ:</strong> <span id="confAddress"></span></p>
+                        <p><strong>Ghi chú:</strong> <span id="confNote"></span></p>
+                        
+                        <div class="price-breakdown">
+                            <div class="breakdown-row">
+                                <span>Tạm tính:</span>
+                                <span>₫<span id="confSubTotal"></span></span>
+                            </div>
+                            <div class="breakdown-row text-primary" id="confDiscountRow" style="display:none;">
+                                <span>Voucher giảm giá:</span>
+                                <span>- ₫<span id="confDiscount">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <div class="total-section">
+                        <span>Tổng thanh toán:</span>
+                        <span class="total-price">₫<span id="totalPrice">125.000</span></span>
+                    </div>
+                    <button class="btn-submit" id="btnNextStep">Tiếp tục</button>
+                    <button class="btn-submit" id="btnSubmitOrder" style="display:none;">Xác nhận Đặt Hàng</button>
+                </div>
             </div>
-            <p class="copyright">© 2026 Mắm Khía Cà Mau 79. All rights reserved.</p>
-            <p class="hosting-note">Hosted proudly on GitHub Pages</p>
-        </footer>
+        </div>
+
+        <!-- Custom Alert Popup -->
+        <div class="custom-alert-overlay" id="customAlert">
+            <div class="custom-alert-box">
+                <div class="custom-alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="custom-alert-msg" id="customAlertMsg">Lỗi</div>
+                <button class="custom-alert-btn" id="customAlertBtn">Đóng</button>
+            </div>
+        </div>
+
+        <!-- Success Toast -->
+        <div class="toast" id="successToast">
+            <i class="fas fa-check-circle"></i> <span id="toastMsg">Thành công!</span>
+        </div>
     </div>
-    
-    <!-- Global CMS Script -->
-    <!-- Editor Mode Script -->
+    <script src="script.js"></script>
     <script src="./editor.js"></script>
 </body>
 </html>
