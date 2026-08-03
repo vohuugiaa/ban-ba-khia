@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id            String    @id @default(cuid())
+  name          String
+  description   String
+  basePrice     Int
+  originalPrice Int?
+  imageUrl      String
+  usp           String    // JSON string or comma separated
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  variants      Variant[]
+  orders        Order[]
+}
+
+model Variant {
+  id        String   @id @default(cuid())
+  productId String
+  name      String   // e.g., "Hũ 500g"
+  group     String   // e.g., "weight" or "spice"
+  price     Int      // Price specific to this variant, 0 if it doesn't affect base price
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id            String   @id @default(cuid())
+  productId     String
+  customerName  String
+  customerPhone String
+  address       String
+  note          String?
+  quantity      Int
+  totalPrice    Int
+  status        String   @default("PENDING")
+  variants      String   // JSON string of selected variants
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  product       Product  @relation(fields: [productId], references: [id])
+}
