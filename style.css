@@ -875,3 +875,77 @@ select.form-input:disabled {
     margin-top: 15px;
     cursor: pointer;
 }
+
+/* Promo Modal */
+#promoModal {
+    align-items: center;
+    padding: 20px;
+}
+.promo-modal-content {
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px !important;
+    height: auto !important;
+    max-width: 380px;
+    animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.promo-modal-content .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.2);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.promo-banner {
+    background: linear-gradient(135deg, #ff4d4f, #ff0f0f);
+    color: white;
+    padding: 30px 20px;
+    font-size: 50px;
+}
+.promo-text {
+    padding: 20px 20px 10px;
+}
+.promo-text h2 {
+    color: var(--primary-color);
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+.promo-text p {
+    font-size: 14px;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+.promo-voucher {
+    background: linear-gradient(135deg, #00c675 0%, #009352 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+#btnPromoSave {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+}

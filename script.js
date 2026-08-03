@@ -656,4 +656,39 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateTimer, 1000);
         updateTimer();
     }
+
+    // ---- Exit-intent Promo Modal ----
+    const promoModal = document.getElementById('promoModal');
+    const btnPromoClose = document.getElementById('btnPromoClose');
+    const btnPromoSave = document.getElementById('btnPromoSave');
+
+    if (promoModal) {
+        // Show after 5s if not shown in this session
+        setTimeout(() => {
+            if (!sessionStorage.getItem('promoShown')) {
+                promoModal.style.display = 'flex';
+                // Trigger reflow for animation
+                setTimeout(() => promoModal.classList.add('show'), 10);
+                sessionStorage.setItem('promoShown', 'true');
+            }
+        }, 5000);
+
+        btnPromoClose.addEventListener('click', () => {
+            promoModal.classList.remove('show');
+            setTimeout(() => promoModal.style.display = 'none', 300);
+        });
+
+        btnPromoSave.addEventListener('click', () => {
+            promoModal.classList.remove('show');
+            setTimeout(() => promoModal.style.display = 'none', 300);
+            
+            // Automatically click the Freeship voucher save button
+            const freeshipBtn = document.querySelector('.voucher-item.freeship-xtra .v-btn');
+            if (freeshipBtn && !freeshipBtn.classList.contains('saved')) {
+                freeshipBtn.click();
+            } else {
+                showToast('Bạn đã lưu mã này rồi!');
+            }
+        });
+    }
 });
