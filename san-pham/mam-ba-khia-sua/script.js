@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ---- State ----
     let basePrice = 125000;
-    
-    // Listen for CMS updates
-    document.addEventListener('cmsLoaded', (e) => {
-        if (e.detail && e.detail.GiaKhuyenMai) {
-            basePrice = parseInt(e.detail.GiaKhuyenMai);
-            updatePriceDisplay();
+    const priceEl = document.getElementById('cms-product-price');
+    if (priceEl) {
+        // Tự động đọc giá tiền từ HTML (đã xóa dấu chấm/chữ) để làm giá thật
+        const parsedPrice = parseInt(priceEl.innerText.replace(/\\D/g, ''));
+        if (!isNaN(parsedPrice) && parsedPrice > 0) {
+            basePrice = parsedPrice;
         }
-    });
+    }
 
     let selectedDiscount = 0;
     let quantity = 1;
