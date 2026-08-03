@@ -18,25 +18,17 @@
                 <i class="fas fa-search"></i>
                 <span>Tìm kiếm sản phẩm...</span>
             </div>
-            <button class="icon-btn cart-header-btn">
+            <button class="icon-btn cart-header-btn" id="btnHeaderCart">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-badge" id="cartBadge">0</span>
             </button>
             <button class="icon-btn"><i class="fas fa-ellipsis-h"></i></button>
         </header>
 
-        <!-- Product Media Carousel -->
-        <div class="product-media" id="productCarousel">
-            <div class="carousel-track" id="carouselTrack">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-resize-webp:720:720.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 1" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 2" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 3" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 4" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 5" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 6" class="carousel-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" alt="Img 7" class="carousel-img">
-            </div>
-            <div class="image-indicator"><span id="carouselIdx">1</span>/7</div>
+        <!-- Product Media -->
+        <div class="product-media">
+            <img src="/Users/huugia/.gemini/antigravity/brain/f54d4ba1-21d6-4de8-918b-f8eabdb93d65/mam_ba_khia_product_1785733836688.jpg" alt="Mắm Ba Khía Sữa" class="main-image">
+            <div class="image-indicator">1/5</div>
         </div>
 
         <!-- Product Info -->
@@ -90,15 +82,15 @@
             <div class="voucher-list">
                 <div class="voucher-item">
                     <div class="v-info">Giảm 15k<br><small>Đơn từ 150k</small></div>
-                    <button class="v-btn" data-discount="15000" data-min="150000">Lưu</button>
+                    <button class="v-btn save-voucher-btn" data-id="v1" data-discount="15000" data-min="150000" data-text="Giảm 15k">Lưu</button>
                 </div>
                 <div class="voucher-item">
                     <div class="v-info">Giảm 30k<br><small>Đơn từ 300k</small></div>
-                    <button class="v-btn" data-discount="30000" data-min="300000">Lưu</button>
+                    <button class="v-btn save-voucher-btn" data-id="v2" data-discount="30000" data-min="300000" data-text="Giảm 30k">Lưu</button>
                 </div>
                 <div class="voucher-item freeship">
                     <div class="v-info">Freeship<br><small>Mọi đơn</small></div>
-                    <button class="v-btn" data-discount="20000" data-min="0">Lưu</button>
+                    <button class="v-btn save-voucher-btn" data-id="v3" data-discount="20000" data-min="0" data-text="Freeship 20k">Lưu</button>
                 </div>
             </div>
         </section>
@@ -132,19 +124,11 @@
                 </div>
             </div>
             <div class="description">
-                <p><strong>Xoài trộn ba khía đưa cơm ngày mưa</strong></p>
-                <p>Mắm ba khía là một trong những món ăn kích thích vị giác, được cả nhà tôi rất ưa thích. Đặc biệt, mắm ba khía trộn xoài là món ăn ngon không thể tả.</p>
-                <p><strong>Nguyên liệu:</strong><br>
-                - Mắm ba khía: 500 gram.<br>
-                - Xoài sống: 1 trái.<br>
-                - Tỏi băm, ớt, chanh, đường.<br>
-                - Cà chua, húng trang trí.</p>
-                <p><strong>Cách làm:</strong><br>
-                - Mắm ba khía mua về rửa sơ với nước sôi để nguội cho bớt vị mặn rồi vớt ra, để ráo và cắt thành các miếng vừa ăn.<br>
-                - Xoài rửa sạch, sau đó bào vỏ và cắt sợi.<br>
-                - Cho vào đĩa đựng ba khía 1 muỗng canh đường, nước cốt của 1 trái chanh. Cho tiếp phần tỏi, ớt băm vào và đảo đều lên.<br>
-                - Sau khi đảo xong, để 15 phút cho ngấm gia vị, rồi cho xoài vào chung với ba khía để trộn cho ngấm vào nhau. Có thể trang trí thêm cà chua, rau húng cho bắt mắt.</p>
-                <p>Ba khía có vị mặn, ngọt đặc trưng, kết hợp với vị chua của xoài, cay của ớt và mùi thơm của tỏi khiến bạn say mê lúc nào không hay.</p>
+                <p>🦀 <strong>MẮM BA KHÍA SỮA TRỘN SẴN - ĐẶC SẢN MIỀN TÂY CHÍNH GỐC</strong> 🦀</p>
+                <p>✨ Ba khía sữa được tuyển chọn kỹ lưỡng, thịt chắc, gạch son béo ngậy. Được muối theo công thức gia truyền, vị mặn mà vừa phải, không quá gắt.</p>
+                <p>✨ Đã được trộn sẵn gia vị: tỏi, ớt, chanh, đường... chua chua ngọt ngọt, cay nồng hấp dẫn. Khách mua về chỉ việc mở hộp là ăn ngay, cực kỳ tiện lợi.</p>
+                <p>🔥 <strong>Đặc biệt:</strong> Đóng gói dạng túi zip cao cấp, sạch sẽ, an toàn vệ sinh thực phẩm, dễ dàng bảo quản sau khi sử dụng.</p>
+                <p>🍚 Ăn kèm với cơm nóng, bún, hoặc làm gỏi đu đủ đều ngon tuyệt cú mèo!</p>
             </div>
             <div class="desc-images">
                  <img src="/Users/huugia/.gemini/antigravity/brain/f54d4ba1-21d6-4de8-918b-f8eabdb93d65/mam_ba_khia_product_1785733836688.jpg" alt="Chi tiết sản phẩm" class="desc-img">
@@ -155,14 +139,50 @@
         <section class="section reviews">
             <div class="section-header">
                 <h2 class="section-title">Đánh giá sản phẩm (2410)</h2>
+                <div class="view-all">
+                    <span>Xem tất cả</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
             
-            <div id="reviewsContainer">
-                <!-- JS injected reviews -->
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">H</div>
+                    <div class="name-rating">
+                        <div class="name">hoangnam.99</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-text">Ba khía ngon lắm shop ơi, vị chua ngọt mặn vừa vặn, nhiều gạch son ăn tốn cơm cực kỳ. Sẽ ủng hộ tiếp!</div>
             </div>
-            <button class="view-more-reviews" id="btnMoreReviews" style="display:none;">
-                Xem thêm đánh giá <i class="fas fa-chevron-down"></i>
-            </button>
+            
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">T</div>
+                    <div class="name-rating">
+                        <div class="name">trangthu_nguyen</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-text">Đóng gói túi zip rất tiện, không bị hôi tủ lạnh. Mình chọn loại cay vừa ăn rất cuốn, mắm thơm phức luôn.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="reviewer-info">
+                    <div class="avatar">M</div>
+                    <div class="name-rating">
+                        <div class="name">minhminh_95</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-text">Trời mưa lạnh lạnh làm bát cơm nóng với mắm này là chuẩn bài. Khuyên mọi người nên mua hũ 1kg cho rẻ.</div>
+            </div>
         </section>
 
         <!-- Space for bottom bar -->
@@ -170,6 +190,16 @@
 
         <!-- Bottom Action Bar -->
         <div class="bottom-bar">
+            <div class="action-icons">
+                <div class="action-icon">
+                    <i class="fas fa-store"></i>
+                    <span>Cửa hàng</span>
+                </div>
+                <div class="action-icon">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Chat</span>
+                </div>
+            </div>
             <div class="action-buttons">
                 <button class="btn-cart" id="btnAddCart">Thêm vào giỏ</button>
                 <button class="btn-buy" id="btnBuyNow">Mua ngay</button>
@@ -217,9 +247,15 @@
                         </div>
                     </div>
 
-                    <h3 class="form-title">Voucher của Shop</h3>
-                    <div class="modal-voucher-status" id="modalVoucherStatus">
-                        Bạn chưa lưu voucher nào.
+                    <!-- Voucher Section in Checkout -->
+                    <div class="form-group voucher-checkout-box">
+                        <div class="voucher-checkout-header">
+                            <label><i class="fas fa-ticket-alt" style="color:var(--primary-color);"></i> Voucher của Shop</label>
+                            <span id="checkoutAppliedVoucherText">Chưa chọn</span>
+                        </div>
+                        <div id="checkoutSavedVouchers" class="checkout-saved-vouchers">
+                            <p class="empty-voucher-text">Bạn chưa lưu voucher nào.</p>
+                        </div>
                     </div>
 
                     <h3 class="form-title">Thông tin giao hàng</h3>
@@ -259,7 +295,7 @@
                     </div>
                     <h3 class="form-title" style="margin-top:0;">Xác nhận đơn hàng</h3>
                     <div class="confirm-summary">
-                        <p><strong>Sản phẩm:</strong> <span id="confProduct"></span></p>
+                        <p><strong>Sản phẩm:</strong> <span id="confProduct"></span> x<span id="confQty"></span></p>
                         <p><strong>Người nhận:</strong> <span id="confName"></span> - <span id="confPhone"></span></p>
                         <p><strong>Địa chỉ:</strong> <span id="confAddress"></span></p>
                         <p><strong>Ghi chú:</strong> <span id="confNote"></span></p>
@@ -288,25 +324,18 @@
             </div>
         </div>
 
+        <!-- Custom Alert Popup -->
+        <div class="custom-alert-overlay" id="customAlert">
+            <div class="custom-alert-box">
+                <div class="custom-alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="custom-alert-msg" id="customAlertMsg">Lỗi</div>
+                <button class="custom-alert-btn" id="customAlertBtn">Đóng</button>
+            </div>
+        </div>
+
         <!-- Success Toast -->
         <div class="toast" id="successToast">
-            <i class="fas fa-check-circle"></i> <span>Thành công!</span>
-        </div>
-        <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
-            <div class="lightbox-header">
-                <div class="lightbox-counter"><span id="lbIdx">1</span>/7</div>
-                <button class="lightbox-close" id="lbClose"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="lightbox-track" id="lbTrack">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-resize-webp:720:720.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
-            </div>
+            <i class="fas fa-check-circle"></i> <span id="toastMsg">Thành công!</span>
         </div>
     </div>
     <script src="script.js"></script>
