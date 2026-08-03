@@ -94,6 +94,16 @@
         });
     });
 
+    // ----- 4.5. Truyền tham số edit=true cho các link -----
+    document.querySelectorAll('a').forEach(a => {
+        let href = a.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('#')) {
+            if (!href.includes('edit=true')) {
+                a.setAttribute('href', href.includes('?') ? href + '&edit=true' : href + '?edit=true');
+            }
+        }
+    });
+
     // ----- 5. Xử lý nút Lưu & Tải Về -----
     document.getElementById('editor-btn-save').addEventListener('click', () => {
         // Hỏi xác nhận
