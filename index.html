@@ -25,10 +25,16 @@
             <button class="icon-btn"><i class="fas fa-ellipsis-h"></i></button>
         </header>
 
-        <!-- Product Media -->
-        <div class="product-media">
-            <img id="cms-product-img" src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-crop-webp:720:720.webp" alt="Mắm Ba Khía Sữa" class="main-image" style="height:400px; object-fit:cover;">
-            <div class="image-indicator">1/5</div>
+        <!-- Product Media Carousel -->
+        <div class="product-media" style="position: relative;">
+            <div class="carousel-container" id="imageCarousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-crop-webp:720:720.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/09f2dd61f9034c7da53f75b014611386~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/081ca4a95b8741e9a4186f0c2a4b3c93~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+                <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp" class="carousel-item" style="flex: 0 0 100%; scroll-snap-align: start; width: 100%; height: 400px; object-fit: cover;">
+            </div>
+            <div class="image-indicator" id="imageIndicator" style="position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; pointer-events: none;">1/5</div>
         </div>
 
         <!-- Product Info -->
@@ -40,8 +46,8 @@
                 <span class="original-price" id="cms-product-oldprice" style="color: var(--text-muted); text-decoration: line-through; font-size: 14px;">59.789₫</span>
             </div>
             
-            <div class="shipping-info" style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">
-                <i class="fas fa-truck"></i> 71.600₫ shipping on this order
+            <div class="shipping-info" style="font-size: 14px; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 6px;">
+                <i class="fas fa-truck" style="font-size: 16px;"></i> 71.600₫ phí vận chuyển cho đơn hàng này
             </div>
             
             <h1 class="product-title" id="cms-product-name" style="font-size: 16px; font-weight: 600; line-height: 1.4; margin-bottom: 8px;">
@@ -49,14 +55,14 @@
             </h1>
             
             <div class="shop-info" style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">
-                Sold by Đặc sản mắm ba khía cà mau 79
+                Được bán bởi Đặc sản mắm ba khía cà mau 79
             </div>
             
             <div class="stats-container" style="font-size: 13px; color: var(--text-muted); margin-bottom: 0;">
                 <span style="font-weight: 700; color: #000;">4.3 <i class="fas fa-star" style="font-size: 10px;"></i></span>
                 <span style="margin-left: 4px;">(5.7K)</span>
                 <span style="margin: 0 6px; color: #ddd;">|</span>
-                <span>112.6K sold</span>
+                <span>112.6K Đã bán</span>
             </div>
         </section>
 
@@ -209,21 +215,26 @@
         <div style="height: 80px;"></div>
 
         <!-- Bottom Action Bar -->
-        <div class="bottom-bar">
-            <div class="action-icons">
-                <div class="action-icon">
-                    <i class="fas fa-store"></i>
-                    <span>Cửa hàng</span>
+        <div class="bottom-bar" style="padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; z-index: 100;">
+            <div class="action-icons" style="display: flex; gap: 15px; margin-right: 15px;">
+                <div class="action-icon" style="display: flex; flex-direction: column; align-items: center; color: #333;">
+                    <i class="fas fa-store" style="font-size: 20px; margin-bottom: 4px;"></i>
+                    <span style="font-size: 10px;">Cửa hàng</span>
                 </div>
-                <div class="action-icon">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Chat</span>
+                <div class="action-icon" style="display: flex; flex-direction: column; align-items: center; color: #333;">
+                    <i class="fas fa-comment-dots" style="font-size: 20px; margin-bottom: 4px;"></i>
+                    <span style="font-size: 10px;">Chat</span>
                 </div>
             </div>
-            <div class="action-buttons">
-                <button class="btn-cart" id="btnAddCart">Thêm vào giỏ</button>
-                <button class="btn-buy" id="btnBuyNow">Mua ngay</button>
+            <div class="action-buttons" style="flex: 1;">
+                <button class="btn-buy" id="btnBuyNow" style="width: 100%; border-radius: 40px; background-color: var(--primary-color); color: white; padding: 12px 0; font-weight: 600; font-size: 16px; border: none;">Mua ngay</button>
             </div>
+        </div>
+
+        <!-- Zoom Modal -->
+        <div class="image-zoom-modal" id="imageZoomModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;">
+            <span id="closeZoom" style="position:absolute; top:20px; right:20px; color:white; font-size:36px; cursor:pointer;">&times;</span>
+            <img id="zoomedImg" src="" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
 
         <!-- Order Modal -->
