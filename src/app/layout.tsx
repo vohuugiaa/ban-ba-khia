@@ -28,9 +28,11 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#111] flex justify-center min-h-screen`}
       >
-        {children}
+        <div className="w-full max-w-[480px] bg-[#0a0a0a] min-h-screen relative shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-x-hidden">
+          {children}
+        </div>
       </body>
     </html>
   );
