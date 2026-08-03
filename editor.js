@@ -1,6 +1,8 @@
 (function() {
-    // Chỉ bật Edit Mode nếu URL có ?edit=true
-    if (!window.location.search.includes('edit=true')) return;
+    // Tự động bật Edit Mode nếu đang mở file trên máy tính (local) HOẶC có tham số edit=true
+    const isLocal = window.location.protocol === 'file:';
+    const isEditMode = window.location.search.includes('edit=true');
+    if (!isLocal && !isEditMode) return;
 
     // ----- 1. Thêm Style cho Edit Mode -----
     const style = document.createElement('style');
@@ -60,8 +62,8 @@
     const panel = document.createElement('div');
     panel.id = 'editor-panel';
     panel.innerHTML = `
-        <span>🛠 <b>CHẾ ĐỘ CHỈNH SỬA</b> (Click đúp để sửa chữ, Click vào ảnh để đổi)</span>
-        <button id="editor-btn-save">Tải File HTML Mới</button>
+        <span>🛠 <b>CHẾ ĐỘ CHỈNH SỬA</b> (Click đúp sửa chữ, Click ảnh để đổi file)</span>
+        <button id="editor-btn-save">Lưu Bản Hoàn Chỉnh</button>
     `;
     document.body.appendChild(panel);
 
@@ -70,7 +72,6 @@
     const textElements = document.querySelectorAll(textSelectors);
     textElements.forEach(el => {
         el.setAttribute('contenteditable', 'true');
-        // Không cho phép gõ Enter tạo dòng mới trong các thẻ span/heading
         el.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && el.tagName !== 'P') {
                 e.preventDefault();
@@ -78,27 +79,68 @@
         });
     });
 
-    // ----- 4. Biến hình ảnh thành có thể thay đổi -----
+    // ----- 4. Xử lý đổi hình ảnh bằng công cụ Upload & Tự nén -----
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/jpeg, image/png, image/webp';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+
+    let currentEditingImage = null;
+
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file || !currentEditingImage) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imgObj = new Image();
+            imgObj.onload = function() {
+                // Resize / Compress image
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 800;
+                let width = imgObj.width;
+                let height = imgObj.height;
+
+                if (width > MAX_WIDTH) {
+                    height = Math.round((height * MAX_WIDTH) / width);
+                    width = MAX_WIDTH;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(imgObj, 0, 0, width, height);
+
+                // Nén ảnh sang Base64
+                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+                
+                // Gán ảnh vào giao diện
+                currentEditingImage.src = compressedBase64;
+                currentEditingImage.setAttribute('src', compressedBase64);
+                
+                // Reset input
+                fileInput.value = '';
+            };
+            imgObj.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
     const images = document.querySelectorAll('img');
     images.forEach(img => {
-        // Đánh dấu ảnh để dễ dọn dẹp event listener nếu cần
-        img.dataset.originalSrc = img.src;
         img.addEventListener('click', function(e) {
             e.preventDefault();
-            const currentPath = img.getAttribute('src');
-            const newPath = prompt("Nhập đường dẫn hình ảnh mới (Ví dụ: assets/images/anh1.jpg)\n\nĐường dẫn hiện tại:", currentPath);
-            if (newPath && newPath.trim() !== '') {
-                img.src = newPath;
-                img.setAttribute('src', newPath); // Đảm bảo outerHTML lấy đúng giá trị
-            }
+            currentEditingImage = img;
+            fileInput.click(); // Mở hộp thoại chọn file
         });
     });
 
-    // ----- 4.5. Truyền tham số edit=true cho các link -----
+    // ----- 4.5. Truyền tham số edit=true cho các link (nếu không chạy local) -----
     document.querySelectorAll('a').forEach(a => {
         let href = a.getAttribute('href');
         if (href && !href.startsWith('http') && !href.startsWith('#')) {
-            if (!href.includes('edit=true')) {
+            if (!isLocal && !href.includes('edit=true')) {
                 a.setAttribute('href', href.includes('?') ? href + '&edit=true' : href + '?edit=true');
             }
         }
@@ -106,33 +148,25 @@
 
     // ----- 5. Xử lý nút Lưu & Tải Về -----
     document.getElementById('editor-btn-save').addEventListener('click', () => {
-        // Hỏi xác nhận
-        if(!confirm("Bạn đã chỉnh sửa xong và muốn tải file HTML này về máy?")) return;
+        if(!confirm("Bạn đã thiết kế xong và muốn lưu lại file này?")) return;
 
-        // Dọn dẹp trước khi lưu
+        // Dọn dẹp
         textElements.forEach(el => el.removeAttribute('contenteditable'));
         document.body.classList.remove('editor-mode-active');
         document.head.removeChild(style);
         document.body.removeChild(panel);
+        document.body.removeChild(fileInput);
         
-        // Loại bỏ script editor ra khỏi file tải về (nếu bạn muốn) - 
-        // Nhưng để người dùng còn sửa lần sau thì ta GIỮ LẠI <script src="/editor.js">, 
-        // chỉ dọn dẹp giao diện editor sinh ra lúc nãy.
-
-        // Lấy toàn bộ mã HTML
         let htmlContent = document.documentElement.outerHTML;
-        
-        // Tạo file và tải về
-        const blob = new Blob(["<!DOCTYPE html>\n<html lang=\"vi\">\n" + htmlContent + "\n</html>"], {type: "text/html;charset=utf-8"});
+        const blob = new Blob(["<!DOCTYPE html>\\n<html lang=\\"vi\\">\\n" + htmlContent + "\\n</html>"], {type: "text/html;charset=utf-8"});
         const a = document.createElement("a");
         const url = URL.createObjectURL(blob);
         a.href = url;
         
-        // Xác định tên file gốc
         const pathname = window.location.pathname;
         let filename = "index.html";
         if (pathname.includes("san-pham/mam-ba-khia-sua")) {
-            filename = "product-index.html"; // Tránh nhầm với trang chủ
+            filename = "index.html"; // Luôn lưu đè vào index.html hiện tại
         }
 
         a.download = filename;
@@ -142,8 +176,7 @@
         setTimeout(() => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-            alert("Đã tải xong! Hãy chép đè file vừa tải về vào thư mục chứa mã nguồn.");
-            // Bật lại chế độ edit
+            alert("✅ Đã lưu xong!\n\nHãy chép đè file vừa tải về vào thư mục gốc.\nSau đó mở Terminal và gõ: git add . && git commit -m 'update' && git push origin main");
             window.location.reload();
         }, 100);
     });
