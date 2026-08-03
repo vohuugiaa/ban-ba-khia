@@ -136,6 +136,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedVariantDisplay) selectedVariantDisplay.textContent = `${selectedWeightText}, ${selectedSpiceText}`;
     };
 
+    const loadSavedCustomerData = () => {
+        if(localStorage.getItem('cusName')) cusName.value = localStorage.getItem('cusName');
+        if(localStorage.getItem('cusPhone')) cusPhone.value = localStorage.getItem('cusPhone');
+        if(localStorage.getItem('cusAddressDetail')) cusAddressDetail.value = localStorage.getItem('cusAddressDetail');
+        
+        const pCode = localStorage.getItem('cusProvince');
+        if (pCode) {
+            cusProvince.value = pCode;
+            cusProvince.dispatchEvent(new Event('change'));
+            
+            const dCode = localStorage.getItem('cusDistrict');
+            if (dCode) {
+                cusDistrict.value = dCode;
+                cusDistrict.dispatchEvent(new Event('change'));
+                
+                const wCode = localStorage.getItem('cusWard');
+                if (wCode) {
+                    cusWard.value = wCode;
+                }
+            }
+        }
+    };
+
     // ---- Address API ----
     fetch('https://provinces.open-api.vn/api/?depth=3')
         .then(response => response.json())
@@ -147,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 opt.textContent = p.name;
                 cusProvince.appendChild(opt);
             });
+            loadSavedCustomerData();
         })
         .catch(err => console.error("Error fetching address API", err));
 
@@ -419,6 +443,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    // Save info to localStorage for next time
+                    localStorage.setItem('cusName', cusName.value);
+                    localStorage.setItem('cusPhone', cusPhone.value);
+                    localStorage.setItem('cusProvince', cusProvince.value);
+                    localStorage.setItem('cusDistrict', cusDistrict.value);
+                    localStorage.setItem('cusWard', cusWard.value);
+                    localStorage.setItem('cusAddressDetail', cusAddressDetail.value);
+
                     closeModal();
                     showToast('Đặt hàng thành công! Cảm ơn bạn.');
                     
