@@ -618,4 +618,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ---- Flash Sale Countdown Timer ----
+    const cdHours = document.getElementById('cdHours');
+    const cdMins = document.getElementById('cdMins');
+    const cdSecs = document.getElementById('cdSecs');
+    
+    if (cdHours && cdMins && cdSecs) {
+        // Set a random time between 1 and 3 hours for the flash sale end time
+        let endTime = localStorage.getItem('fsEndTime');
+        if (!endTime || endTime < new Date().getTime()) {
+            // Expired or not set, create a new one (e.g. 2 hours 15 mins from now)
+            const duration = (2 * 60 * 60 * 1000) + (15 * 60 * 1000) + (45 * 1000); 
+            endTime = new Date().getTime() + duration;
+            localStorage.setItem('fsEndTime', endTime);
+        }
+
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            if (distance < 0) {
+                // If somehow it reaches 0, reset it for another 2 hours
+                endTime = now + (2 * 60 * 60 * 1000);
+                localStorage.setItem('fsEndTime', endTime);
+            }
+
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            cdHours.textContent = h.toString().padStart(2, '0');
+            cdMins.textContent = m.toString().padStart(2, '0');
+            cdSecs.textContent = s.toString().padStart(2, '0');
+        };
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    }
 });

@@ -41,12 +41,23 @@
 
         <!-- Product Info -->
         <section class="section product-info">
-            <div class="price-container">
-                <div class="current-price">
-                    <span class="currency">₫</span><span class="amount" id="displayPrice">125.000</span>
+            <div class="flash-sale-banner">
+                <div class="fs-left">
+                    <div class="fs-title"><i class="fas fa-bolt"></i> FLASH SALE</div>
+                    <div class="fs-price-wrapper">
+                        <div class="fs-price"><span class="currency">₫</span><span class="amount" id="displayPrice">125.000</span></div>
+                        <div class="fs-original">
+                            <span class="old-price">₫180.000</span>
+                            <span class="discount-badge">-30%</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="original-price">₫150.000</div>
-                <div class="discount-badge">-16%</div>
+                <div class="fs-right">
+                    <div class="fs-ends-in">Kết thúc trong</div>
+                    <div class="countdown" id="fsCountdown">
+                        <span class="cd-box" id="cdHours">02</span>:<span class="cd-box" id="cdMins">15</span>:<span class="cd-box" id="cdSecs">45</span>
+                    </div>
+                </div>
             </div>
             
             <h1 class="product-title">
