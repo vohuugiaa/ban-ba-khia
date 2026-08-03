@@ -27,7 +27,7 @@
 
         <!-- Product Media -->
         <div class="product-media">
-            <img src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Mắm Ba Khía Sữa" class="main-image">
+            <img id="cms-product-img" src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Mắm Ba Khía Sữa" class="main-image">
             <div class="image-indicator">1/5</div>
         </div>
 
@@ -35,13 +35,13 @@
         <section class="section product-info">
             <div class="price-container">
                 <div class="current-price">
-                    <span class="currency">₫</span><span class="amount" id="displayPrice">125.000</span>
+                    <span class="currency">₫</span><span class="amount" id="cms-product-price">125.000</span>
                 </div>
-                <div class="original-price">₫150.000</div>
+                <div class="original-price" id="cms-product-oldprice">₫150.000</div>
                 <div class="discount-badge">-16%</div>
             </div>
             
-            <h1 class="product-title">
+            <h1 class="product-title" id="cms-product-name">
                 <span class="mall-badge">Mall</span> 
                 Đặc sản mắm ba khía sữa trộn sẵn gia vị chuẩn Nam Bộ siêu tốn cơm
             </h1>
@@ -131,7 +131,7 @@
                 <p>🍚 Ăn kèm với cơm nóng, bún, hoặc làm gỏi đu đủ đều ngon tuyệt cú mèo!</p>
             </div>
             <div class="desc-images">
-                 <img src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Chi tiết sản phẩm" class="desc-img">
+                 <img id="cms-product-desc-img" src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Chi tiết sản phẩm" class="desc-img">
             </div>
         </section>
         <!-- Related Products -->
@@ -234,7 +234,7 @@
         <div class="modal-overlay" id="orderModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Thumbnail" class="modal-thumb">
+                    <img id="cms-modal-thumb" src="https://images.unsplash.com/photo-1601000858164-839f99f30e66?auto=format&fit=crop&q=80&w=800" alt="Thumbnail" class="modal-thumb">
                     <div class="modal-price-info">
                         <div class="modal-price text-primary">₫<span id="modalPrice">125.000</span></div>
                         <div class="modal-stock">Kho: 985</div>
@@ -362,6 +362,7 @@
             <i class="fas fa-check-circle"></i> <span id="toastMsg">Thành công!</span>
         </div>
     </div>
+    <script src="/cms.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

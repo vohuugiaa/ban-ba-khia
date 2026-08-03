@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ---- State ----
     let basePrice = 125000;
+    
+    // Listen for CMS updates
+    document.addEventListener('cmsLoaded', (e) => {
+        if (e.detail && e.detail.GiaKhuyenMai) {
+            basePrice = parseInt(e.detail.GiaKhuyenMai);
+            updatePriceDisplay();
+        }
+    });
+
     let selectedDiscount = 0;
     let quantity = 1;
     let selectedWeightText = 'Hũ 500g';
