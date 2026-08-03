@@ -772,9 +772,20 @@ select.form-input:disabled {
 .modal-voucher-status .v-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.modal-voucher-status .v-item > span:first-child {
+    flex: 1;
+}
+.modal-voucher-status .v-item > span:last-child {
+    flex-shrink: 0;
+    white-space: nowrap;
+    text-align: right;
 }
 .modal-voucher-status .v-item:last-child {
     border-bottom: none;
