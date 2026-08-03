@@ -297,12 +297,6 @@ body {
 .voucher-item.freeship-xtra {
     background: linear-gradient(135deg, #00c675 0%, #009352 100%);
     border: none;
-    position: relative;
-}
-.voucher-item.freeship-xtra .v-icon-left {
-    padding-left: 12px;
-    font-size: 20px;
-    color: white;
 }
 .v-info {
     flex: 1;
@@ -335,9 +329,6 @@ body {
 .v-btn.saved {
     background: #ddd;
     color: #666;
-}
-.voucher-item.freeship .v-btn:not(.saved) {
-    background: #00b14f;
 }
 
 /* Video Placeholder */
