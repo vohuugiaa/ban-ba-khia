@@ -92,23 +92,44 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateVoucherUI = () => {
-        if (!modalVoucherStatus) return;
-        if (savedVouchers.length === 0) {
-            modalVoucherStatus.innerHTML = 'Bạn chưa lưu voucher nào.';
-            return;
-        }
-
         const subTotal = basePrice * quantity;
         let html = '';
-        savedVouchers.forEach(v => {
-            if (subTotal >= v.minOrder) {
-                html += `<div class="v-item"><span class="v-applied"><i class="fas fa-check-circle"></i> Đã đủ điều kiện</span><span class="text-primary">Giảm ${formatCurrency(v.discount)}đ</span></div>`;
-            } else {
-                const missing = v.minOrder - subTotal;
-                html += `<div class="v-item"><span class="v-missing">Mua thêm ${formatCurrency(missing)}đ nữa để dùng mã</span><span class="text-gray">Giảm ${formatCurrency(v.discount)}đ</span></div>`;
-            }
-        });
+        
+        if (savedVouchers.length === 0) {
+            html = `
+                <div class="voucher-item freeship-xtra" id="modalVoucherUI" style="margin-bottom: 10px; width: 100%;">
+                    <div class="v-info">
+                        <div style="display:flex; align-items:center; gap:5px;"><i class="fas fa-truck-fast"></i> Freeship</div>
+                        <small>Mọi đơn hàng</small>
+                    </div>
+                    <button class="v-btn" id="btnModalSaveVoucher" data-discount="20000" data-min="0" style="height:auto; padding: 6px 12px; border-radius: 4px;">Lưu</button>
+                </div>
+            `;
+        } else {
+            savedVouchers.forEach(v => {
+                if (subTotal >= v.minOrder) {
+                    html += `<div class="v-item"><span class="v-applied"><i class="fas fa-check-circle"></i> Đã áp dụng mã Freeship</span><span class="text-primary">Giảm ${formatCurrency(v.discount)}đ</span></div>`;
+                } else {
+                    const missing = v.minOrder - subTotal;
+                    html += `<div class="v-item"><span class="v-missing">Mua thêm ${formatCurrency(missing)}đ nữa để dùng mã</span><span class="text-gray">Giảm ${formatCurrency(v.discount)}đ</span></div>`;
+                }
+            });
+        }
+        
         modalVoucherStatus.innerHTML = html;
+        
+        // Re-attach event listener if the button was just rendered
+        const btnModalSave = document.getElementById('btnModalSaveVoucher');
+        if (btnModalSave) {
+            btnModalSave.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Trigger the main freeship button to sync state
+                const freeshipBtn = document.querySelector('.voucher-item.freeship-xtra .v-btn');
+                if (freeshipBtn && !freeshipBtn.classList.contains('saved')) {
+                    freeshipBtn.click();
+                }
+            });
+        }
     };
 
     const applyBestVoucher = () => {
@@ -141,75 +162,99 @@ document.addEventListener('DOMContentLoaded', () => {
         if(localStorage.getItem('cusPhone')) cusPhone.value = localStorage.getItem('cusPhone');
         if(localStorage.getItem('cusAddressDetail')) cusAddressDetail.value = localStorage.getItem('cusAddressDetail');
         
-        const pCode = localStorage.getItem('cusProvince');
-        if (pCode) {
-            cusProvince.value = pCode;
-            cusProvince.dispatchEvent(new Event('change'));
+        const pName = localStorage.getItem('cusProvince');
+        if (pName) {
+            cusProvince.value = pName;
+            cusProvince.dispatchEvent(new Event('input'));
             
-            const dCode = localStorage.getItem('cusDistrict');
-            if (dCode) {
-                cusDistrict.value = dCode;
-                cusDistrict.dispatchEvent(new Event('change'));
-                
-                const wCode = localStorage.getItem('cusWard');
-                if (wCode) {
-                    cusWard.value = wCode;
+            setTimeout(() => {
+                const dName = localStorage.getItem('cusDistrict');
+                if (dName) {
+                    cusDistrict.value = dName;
+                    cusDistrict.dispatchEvent(new Event('input'));
+                    
+                    setTimeout(() => {
+                        const wName = localStorage.getItem('cusWard');
+                        if (wName) {
+                            cusWard.value = wName;
+                        }
+                    }, 50);
                 }
-            }
+            }, 50);
         }
     };
 
     // ---- Address API ----
+    let selectedProvinceCode = null;
+    let selectedDistrictCode = null;
+
     fetch('https://provinces.open-api.vn/api/?depth=3')
         .then(response => response.json())
         .then(data => {
             provincesData = data;
+            const pList = document.getElementById('provinceList');
             provincesData.forEach(p => {
                 const opt = document.createElement('option');
-                opt.value = p.code;
-                opt.textContent = p.name;
-                cusProvince.appendChild(opt);
+                opt.value = p.name;
+                opt.setAttribute('data-code', p.code);
+                pList.appendChild(opt);
             });
             loadSavedCustomerData();
         })
         .catch(err => console.error("Error fetching address API", err));
 
-    cusProvince.addEventListener('change', (e) => {
-        const pCode = e.target.value;
-        cusDistrict.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
-        cusWard.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+    cusProvince.addEventListener('input', (e) => {
+        const pName = e.target.value;
+        const pList = document.getElementById('provinceList');
+        const option = Array.from(pList.options).find(opt => opt.value === pName);
+        
+        const dList = document.getElementById('districtList');
+        const wList = document.getElementById('wardList');
+        dList.innerHTML = '';
+        wList.innerHTML = '';
+        cusDistrict.value = '';
+        cusWard.value = '';
         cusWard.disabled = true;
 
-        if (pCode) {
-            const province = provincesData.find(p => p.code == pCode);
+        if (option) {
+            selectedProvinceCode = option.getAttribute('data-code');
+            const province = provincesData.find(p => p.code == selectedProvinceCode);
             districtsData = province.districts || [];
             districtsData.forEach(d => {
                 const opt = document.createElement('option');
-                opt.value = d.code;
-                opt.textContent = d.name;
-                cusDistrict.appendChild(opt);
+                opt.value = d.name;
+                opt.setAttribute('data-code', d.code);
+                dList.appendChild(opt);
             });
             cusDistrict.disabled = false;
         } else {
+            selectedProvinceCode = null;
             cusDistrict.disabled = true;
         }
     });
 
-    cusDistrict.addEventListener('change', (e) => {
-        const dCode = e.target.value;
-        cusWard.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+    cusDistrict.addEventListener('input', (e) => {
+        const dName = e.target.value;
+        const dList = document.getElementById('districtList');
+        const option = Array.from(dList.options).find(opt => opt.value === dName);
         
-        if (dCode) {
-            const district = districtsData.find(d => d.code == dCode);
+        const wList = document.getElementById('wardList');
+        wList.innerHTML = '';
+        cusWard.value = '';
+
+        if (option) {
+            selectedDistrictCode = option.getAttribute('data-code');
+            const district = districtsData.find(d => d.code == selectedDistrictCode);
             wardsData = district.wards || [];
             wardsData.forEach(w => {
                 const opt = document.createElement('option');
-                opt.value = w.code;
-                opt.textContent = w.name;
-                cusWard.appendChild(opt);
+                opt.value = w.name;
+                opt.setAttribute('data-code', w.code);
+                wList.appendChild(opt);
             });
             cusWard.disabled = false;
         } else {
+            selectedDistrictCode = null;
             cusWard.disabled = true;
         }
     });
@@ -366,9 +411,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnNextStep.addEventListener('click', () => {
             const name = cusName.value.trim();
             const phone = cusPhone.value.trim();
-            const pCode = cusProvince.value;
-            const dCode = cusDistrict.value;
-            const wCode = cusWard.value;
+            const pName = cusProvince.value.trim();
+            const dName = cusDistrict.value.trim();
+            const wName = cusWard.value.trim();
             const detail = cusAddressDetail.value.trim();
 
             if (!name) return showToast('Vui lòng nhập họ và tên!', true);
@@ -377,14 +422,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 phoneError.classList.add('show');
                 return showToast('Số điện thoại không hợp lệ!', true);
             }
-            if (!pCode || !dCode || !wCode || !detail) {
-                return showToast('Vui lòng chọn đầy đủ địa chỉ giao hàng!', true);
+            if (!pName || !dName || !wName || !detail) {
+                return showToast('Vui lòng nhập đầy đủ địa chỉ giao hàng!', true);
             }
 
             // Get Address text
-            const pName = cusProvince.options[cusProvince.selectedIndex].text;
-            const dName = cusDistrict.options[cusDistrict.selectedIndex].text;
-            const wName = cusWard.options[cusWard.selectedIndex].text;
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
 
             // Populate Confirm Step
@@ -463,9 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         qtyInput.value = 1;
                         quantity = 1;
                         cusProvince.value = '';
-                        cusDistrict.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+                        cusDistrict.value = '';
                         cusDistrict.disabled = true;
-                        cusWard.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                        cusWard.value = '';
                         cusWard.disabled = true;
                         
                         btnSubmitOrder.innerHTML = 'Xác nhận Đặt Hàng';

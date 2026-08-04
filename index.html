@@ -228,7 +228,13 @@
 
                     <h3 class="form-title">Voucher của Shop</h3>
                     <div class="modal-voucher-status" id="modalVoucherStatus">
-                        Bạn chưa lưu voucher nào.
+                        <div class="voucher-item freeship-xtra" id="modalVoucherUI" style="margin-bottom: 10px; width: 100%;">
+                            <div class="v-info">
+                                <div style="display:flex; align-items:center; gap:5px;"><i class="fas fa-truck-fast"></i> Freeship</div>
+                                <small>Mọi đơn hàng</small>
+                            </div>
+                            <button class="v-btn" id="btnModalSaveVoucher" data-discount="20000" data-min="0">Lưu</button>
+                        </div>
                     </div>
 
                     <h3 class="form-title">Thông tin giao hàng</h3>
@@ -240,17 +246,16 @@
                         <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ!</div>
                     </div>
                     
-                    <!-- API Address Selectors -->
+                    <!-- API Address Selectors (Autocomplete) -->
                     <div class="form-group address-group">
-                        <select id="cusProvince" class="form-input" required>
-                            <option value="">Chọn Tỉnh/Thành phố</option>
-                        </select>
-                        <select id="cusDistrict" class="form-input" required disabled>
-                            <option value="">Chọn Quận/Huyện</option>
-                        </select>
-                        <select id="cusWard" class="form-input" required disabled>
-                            <option value="">Chọn Phường/Xã</option>
-                        </select>
+                        <input type="text" id="cusProvince" list="provinceList" class="form-input" placeholder="Gõ để chọn Tỉnh/Thành phố..." required autocomplete="off">
+                        <datalist id="provinceList"></datalist>
+                        
+                        <input type="text" id="cusDistrict" list="districtList" class="form-input" placeholder="Gõ để chọn Quận/Huyện..." required disabled autocomplete="off">
+                        <datalist id="districtList"></datalist>
+                        
+                        <input type="text" id="cusWard" list="wardList" class="form-input" placeholder="Gõ để chọn Phường/Xã..." required disabled autocomplete="off">
+                        <datalist id="wardList"></datalist>
                     </div>
 
                     <div class="form-group">
