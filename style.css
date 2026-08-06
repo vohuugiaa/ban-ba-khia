@@ -1,13 +1,13 @@
 :root {
-    --primary-color: #d32f2f; /* Professional Red */
-    --primary-light: #ffebee;
-    --highlight-color: #f57c00; /* Professional Gold/Orange */
-    --text-main: #212121;
-    --text-secondary: #555555;
-    --text-muted: #757575;
-    --bg-main: #f5f5f5; /* Clean Grey */
+    --primary-color: #b73e20; /* Màu đỏ gạch, mắm tôm nung */
+    --primary-light: #fae9e6;
+    --highlight-color: #e65100; /* Cam rực rỡ, màu ớt chưng */
+    --text-main: #4a3328; /* Nâu đất phù sa */
+    --text-secondary: #6d4c41;
+    --text-muted: #8d6e63;
+    --bg-main: #fdfbf7; /* Trắng ngà, ấm áp */
     --bg-white: #ffffff;
-    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color: rgba(183, 62, 32, 0.15);
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -501,16 +501,16 @@ body {
 .modal-thumb {
     width: 100px;
     height: 100px;
-    border-radius: 2px;
+    border-radius: 6px;
     object-fit: cover;
-    margin-top: -40px;
-    border: 1px solid #e0e0e0;
+    margin-top: 0;
+    border: 1px solid var(--border-color);
     background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
-.modal-price-info { margin-left: 12px; padding-top: 5px; }
-.modal-price { font-size: 20px; color: #ee4d2d; font-weight: 500; }
-.modal-stock { font-size: 13px; color: #757575; margin-top: 4px; }
+.modal-price-info { margin-left: 15px; padding-top: 5px; }
+.modal-price { font-size: 22px; color: var(--primary-color); font-weight: 600; }
+.modal-stock { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 .modal-selected-variant {
     font-size: 12px;
     color: var(--text-main);
@@ -550,20 +550,20 @@ body {
     margin-top: 8px;
 }
 .option-btn {
-    background: #f5f5f5;
-    border: 1px solid #f5f5f5;
+    background: var(--bg-white);
+    border: 1px solid rgba(183, 62, 32, 0.2);
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-main);
     cursor: pointer;
     transition: all 0.2s;
 }
 .option-btn.active {
-    background: #fff0f0;
-    border-color: #ee4d2d;
-    color: #ee4d2d;
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .form-group { margin-bottom: 15px; }
@@ -1023,11 +1023,12 @@ select.form-input:disabled {
 }
 .btn-giant-submit {
     animation: none;
-    background: #ee4d2d !important;
+    background: var(--primary-color) !important;
     color: #fff;
-    box-shadow: none;
-    font-size: 16px;
-    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(183, 62, 32, 0.4);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
     padding: 14px;
     margin: 10px 0 0 0;
     width: 100%;

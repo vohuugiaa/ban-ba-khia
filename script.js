@@ -96,12 +96,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Modal & Step Logic ----
     
+    // Handle Browser Back Button for Modals
+    window.addEventListener('popstate', (e) => {
+        if (checkoutModal.classList.contains('active')) {
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (successModal.classList.contains('active')) {
+            successModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
     const openCheckoutModal = () => {
         checkoutModal.classList.add('active');
         step1.classList.add('active');
         step2.classList.remove('active');
         step3.classList.remove('active');
         document.body.style.overflow = 'hidden';
+        history.pushState({ modalOpen: true }, '', '#checkout');
     };
 
     if (btnScrollToOrder) btnScrollToOrder.addEventListener('click', openCheckoutModal);
@@ -111,6 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCheckoutClose.addEventListener('click', () => {
             checkoutModal.classList.remove('active');
             document.body.style.overflow = '';
+            if (window.location.hash === '#checkout') {
+                history.back();
+            }
         });
     }
 
@@ -118,6 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSuccessClose.addEventListener('click', () => {
             successModal.classList.remove('active');
             document.body.style.overflow = '';
+            if (window.location.hash === '#success') {
+                history.back();
+            }
         });
     }
 
@@ -419,9 +438,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('cusWard', wName);
                     localStorage.setItem('cusAddressDetail', detail);
 
-                    // Show Success Modal
                     checkoutModal.classList.remove('active');
                     successModal.classList.add('active');
+                    history.pushState({ modalOpen: true }, '', '#success');
                     
                     // Reset form slightly later
                     setTimeout(() => {
