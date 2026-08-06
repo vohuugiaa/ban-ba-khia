@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const weightBtns = document.querySelectorAll('#weightOptions .option-btn');
     const spiceBtns = document.querySelectorAll('#spiceOptions .option-btn');
     const displayPriceEl = document.getElementById('displayPrice');
-    const totalPriceEl = document.getElementById('totalPrice');
-    const summarySubTotal = document.getElementById('summarySubTotal');
-
+    const modalPriceEl = document.getElementById('modalPrice');
+    
     // Quantity
     const btnMinus = document.getElementById('btnMinus');
     const btnPlus = document.getElementById('btnPlus');
@@ -24,13 +23,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const cusDistrict = document.getElementById('cusDistrict');
     const cusWard = document.getElementById('cusWard');
     
-    const btnSubmitOrder = document.getElementById('btnSubmitOrder');
+    // Modals & Steps
+    const checkoutModal = document.getElementById('checkoutModal');
+    const successModal = document.getElementById('successModal');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    
+    // Buttons
     const btnScrollToOrder = document.getElementById('btnScrollToOrder');
     const btnStickyOrder = document.getElementById('btnStickyOrder');
-    const orderSection = document.getElementById('orderSection');
-    const stickyOrderBar = document.getElementById('stickyOrderBar');
+    const btnCheckoutClose = document.getElementById('btnCheckoutClose');
+    const btnSuccessClose = document.getElementById('btnSuccessClose');
     
-    const successToast = document.getElementById('successToast');
+    const btnToStep2 = document.getElementById('btnToStep2');
+    const btnBackToStep1 = document.getElementById('btnBackToStep1');
+    const btnToStep3 = document.getElementById('btnToStep3');
+    const btnBackToStep2 = document.getElementById('btnBackToStep2');
+    const btnSubmitOrder = document.getElementById('btnSubmitOrder');
+
+    // Confirm Summary Fields
+    const confProduct = document.getElementById('confProduct');
+    const confQty = document.getElementById('confQty');
+    const confName = document.getElementById('confName');
+    const confPhone = document.getElementById('confPhone');
+    const confAddress = document.getElementById('confAddress');
+    const confNote = document.getElementById('confNote');
+    const confSubTotal = document.getElementById('confSubTotal');
+    const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
     let basePrice = 125000;
@@ -48,37 +68,124 @@ document.addEventListener('DOMContentLoaded', () => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
 
-    const showToast = (message, isError = false) => {
-        successToast.innerHTML = isError ? `<i class="fas fa-exclamation-circle"></i> <span>${message}</span>` : `<i class="fas fa-check-circle"></i> <span>${message}</span>`;
-        successToast.style.background = isError ? '#ff4d4f' : 'var(--highlight-color)';
-        successToast.classList.add('show');
-        setTimeout(() => successToast.classList.remove('show'), 3000);
+    const showToast = (message) => {
+        alert(message); // Fallback for simple errors
     };
 
     // ---- Price Logic ----
     const updatePriceDisplay = () => {
         const subTotal = basePrice * quantity;
         
-        // In Mekong Delta theme, freeship is automatically applied. 
-        // We just display the subtotal as the total.
-        const total = subTotal;
-        
         if (displayPriceEl) displayPriceEl.textContent = formatCurrency(basePrice);
-        if (summarySubTotal) summarySubTotal.textContent = formatCurrency(subTotal);
-        if (totalPriceEl) totalPriceEl.textContent = formatCurrency(total);
+        if (modalPriceEl) modalPriceEl.textContent = formatCurrency(basePrice);
     };
 
-    // ---- Event Listeners ----
-
-    // Smooth Scroll to Order Form
-    const scrollToOrder = () => {
-        orderSection.scrollIntoView({ behavior: 'smooth' });
+    // ---- Modal & Step Logic ----
+    
+    const openCheckoutModal = () => {
+        checkoutModal.classList.add('active');
+        step1.classList.add('active');
+        step2.classList.remove('active');
+        step3.classList.remove('active');
     };
 
-    if (btnScrollToOrder) btnScrollToOrder.addEventListener('click', scrollToOrder);
-    if (btnStickyOrder) btnStickyOrder.addEventListener('click', scrollToOrder);
+    if (btnScrollToOrder) btnScrollToOrder.addEventListener('click', openCheckoutModal);
+    if (btnStickyOrder) btnStickyOrder.addEventListener('click', openCheckoutModal);
+    
+    if (btnCheckoutClose) {
+        btnCheckoutClose.addEventListener('click', () => {
+            checkoutModal.classList.remove('active');
+        });
+    }
 
-    // Sticky Order Bar is now purely CSS driven (always visible)
+    if (btnSuccessClose) {
+        btnSuccessClose.addEventListener('click', () => {
+            successModal.classList.remove('active');
+        });
+    }
+
+    // Step 1 -> 2
+    if (btnToStep2) {
+        btnToStep2.addEventListener('click', () => {
+            step1.classList.remove('active');
+            step2.classList.add('active');
+        });
+    }
+
+    // Step 2 -> 1
+    if (btnBackToStep1) {
+        btnBackToStep1.addEventListener('click', () => {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        });
+    }
+
+    // Phone Validation
+    const isValidPhone = (phone) => {
+        const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/;
+        return phoneRegex.test(phone);
+    };
+
+    if (cusPhone) {
+        cusPhone.addEventListener('input', function() {
+            if (this.value.trim() && !isValidPhone(this.value.trim())) {
+                this.classList.add('error');
+                phoneError.classList.add('show');
+            } else {
+                this.classList.remove('error');
+                phoneError.classList.remove('show');
+            }
+        });
+    }
+
+    // Step 2 -> 3 (Validation & Summary)
+    if (btnToStep3) {
+        btnToStep3.addEventListener('click', () => {
+            const name = cusName.value.trim();
+            const phone = cusPhone.value.trim();
+            const pName = cusProvince.value.trim();
+            const dName = cusDistrict.value.trim();
+            const wName = cusWard.value.trim();
+            const detail = cusAddressDetail.value.trim();
+            const note = cusNote.value.trim() || 'Không có';
+
+            if (!name) return showToast('Vui lòng nhập họ và tên!');
+            if (!phone || !isValidPhone(phone)) {
+                cusPhone.classList.add('error');
+                phoneError.classList.add('show');
+                return showToast('Số điện thoại không hợp lệ!');
+            }
+            if (!pName || !dName || !wName || !detail) {
+                return showToast('Vui lòng nhập đầy đủ địa chỉ giao hàng!');
+            }
+
+            // Populate Summary
+            const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
+            const productName = `${selectedWeightText}, ${selectedSpiceText}`;
+            const total = basePrice * quantity;
+
+            confProduct.textContent = productName;
+            confQty.textContent = quantity;
+            confName.textContent = name;
+            confPhone.textContent = phone;
+            confAddress.textContent = fullAddress;
+            confNote.textContent = note;
+            confSubTotal.textContent = formatCurrency(total);
+            confTotal.textContent = formatCurrency(total);
+
+            // Go to Step 3
+            step2.classList.remove('active');
+            step3.classList.add('active');
+        });
+    }
+
+    // Step 3 -> 2
+    if (btnBackToStep2) {
+        btnBackToStep2.addEventListener('click', () => {
+            step3.classList.remove('active');
+            step2.classList.add('active');
+        });
+    }
 
     // Options
     weightBtns.forEach(btn => {
@@ -130,24 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.value = val;
             quantity = val;
             updatePriceDisplay();
-        });
-    }
-
-    // Phone Validation
-    const isValidPhone = (phone) => {
-        const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/;
-        return phoneRegex.test(phone);
-    };
-
-    if (cusPhone) {
-        cusPhone.addEventListener('input', function() {
-            if (this.value.trim() && !isValidPhone(this.value.trim())) {
-                this.classList.add('error');
-                phoneError.classList.add('show');
-            } else {
-                this.classList.remove('error');
-                phoneError.classList.remove('show');
-            }
         });
     }
 
@@ -270,16 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const detail = cusAddressDetail.value.trim();
             const note = cusNote.value.trim() || 'Không có';
 
-            if (!name) return showToast('Bà con vui lòng nhập họ và tên!', true);
-            if (!phone || !isValidPhone(phone)) {
-                cusPhone.classList.add('error');
-                phoneError.classList.add('show');
-                return showToast('Số điện thoại không hợp lệ!', true);
-            }
-            if (!pName || !dName || !wName || !detail) {
-                return showToast('Bà con nhập đầy đủ địa chỉ giao hàng nha!', true);
-            }
-
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
             const productName = `${selectedWeightText}, ${selectedSpiceText}`;
             const total = basePrice * quantity;
@@ -323,7 +402,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('cusWard', wName);
                     localStorage.setItem('cusAddressDetail', detail);
 
-                    showToast('Bà con đặt hàng thành công! Shop sẽ gọi lại xác nhận nghen.');
+                    // Show Success Modal
+                    checkoutModal.classList.remove('active');
+                    successModal.classList.add('active');
                     
                     // Reset form slightly later
                     setTimeout(() => {
@@ -349,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error submitting order:', error);
-                showToast('Có lỗi xảy ra, bà con gọi Hotline giúp shop nghen!', true);
+                showToast('Có lỗi xảy ra, vui lòng thử lại sau!');
                 btnSubmitOrder.innerHTML = 'CHỐT ĐƠN HÀNG';
                 btnSubmitOrder.disabled = false;
             });

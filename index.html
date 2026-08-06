@@ -65,8 +65,8 @@
                 </div>
             </div>
             
-            <!-- Quick Order Action -->
-            <button class="btn-giant-order" id="btnScrollToOrder">ĐIỀN FORM ĐẶT HÀNG NGAY <i class="fas fa-arrow-down"></i></button>
+            <!-- Quick Order Action (Triggers Modal) -->
+            <button class="btn-giant-order" id="btnScrollToOrder">ĐẶT HÀNG NGAY <i class="fas fa-arrow-right"></i></button>
         </section>
 
         <!-- USPs (Lý do nên mua) -->
@@ -158,100 +158,148 @@
             </div>
         </section>
 
-        <!-- INLINE ORDER FORM -->
-        <section class="section order-section" id="orderSection">
-            <div class="order-form-container">
-                <h2 class="order-title">ĐIỀN THÔNG TIN ĐẶT HÀNG</h2>
-                <div class="order-subtitle">Bà con điền thông tin bên dưới để shop gửi hàng sớm nhất nhé!</div>
-                
-                <!-- Phân loại sản phẩm -->
-                <div class="form-group">
-                    <label>Chọn khối lượng</label>
-                    <div class="option-group" id="weightOptions">
-                        <button class="option-btn active" data-price="125000">Hũ 500g</button>
-                        <button class="option-btn" data-price="240000">Hũ 1Kg</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Độ cay</label>
-                    <div class="option-group" id="spiceOptions">
-                        <button class="option-btn active">Không cay</button>
-                        <button class="option-btn">Cay vừa</button>
-                        <button class="option-btn">Siêu cay</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Số lượng</label>
-                    <div class="quantity-selector">
-                        <button class="qty-btn" id="btnMinus"><i class="fas fa-minus"></i></button>
-                        <input type="number" id="qtyInput" value="1" min="1" max="99">
-                        <button class="qty-btn" id="btnPlus"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <h3 class="form-title">Thông tin giao hàng</h3>
-                <div class="form-group">
-                    <input type="text" id="cusName" class="form-input" placeholder="Họ và tên cô/chú/anh/chị" required>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="cusPhone" class="form-input" placeholder="Số điện thoại nhận hàng" required>
-                    <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ!</div>
-                </div>
-                
-                <!-- API Address Selectors (Autocomplete) -->
-                <div class="form-group address-group">
-                    <input type="text" id="cusProvince" list="provinceList" class="form-input" placeholder="Gõ để chọn Tỉnh/Thành phố..." required autocomplete="off">
-                    <datalist id="provinceList"></datalist>
-                    
-                    <input type="text" id="cusDistrict" list="districtList" class="form-input" placeholder="Gõ để chọn Quận/Huyện..." required disabled autocomplete="off">
-                    <datalist id="districtList"></datalist>
-                    
-                    <input type="text" id="cusWard" list="wardList" class="form-input" placeholder="Gõ để chọn Phường/Xã..." required disabled autocomplete="off">
-                    <datalist id="wardList"></datalist>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường chi tiết..." required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú thêm (không bắt buộc)">
-                </div>
-
-                <!-- Price Summary -->
-                <div class="price-summary-box">
-                    <div class="summary-row">
-                        <span>Tiền hàng:</span>
-                        <span>₫<span id="summarySubTotal">125.000</span></span>
-                    </div>
-                    <div class="summary-row text-highlight">
-                        <span>Phí vận chuyển:</span>
-                        <span>0đ (Miễn phí)</span>
-                    </div>
-                    <div class="summary-row total-row">
-                        <span>TỔNG CỘNG:</span>
-                        <span class="total-amount">₫<span id="totalPrice">125.000</span></span>
-                    </div>
-                </div>
-
-                <button class="btn-giant-submit" id="btnSubmitOrder">CHỐT ĐƠN HÀNG</button>
-                <div class="trust-badge">
-                    <i class="fas fa-shield-check"></i> Cam kết đổi trả nếu hàng kém chất lượng
-                </div>
-            </div>
-        </section>
-
+        <!-- (Inline Order Form has been removed and converted to a Modal) -->
         <div style="height: 100px;"></div>
 
-        <!-- Sticky Floating Action Button (Shows when scrolling past hero) -->
+        <!-- Sticky Floating Action Button -->
         <div class="sticky-order-bar" id="stickyOrderBar">
-            <button class="btn-giant-order" id="btnStickyOrder">ĐIỀN FORM ĐẶT HÀNG NGAY</button>
+            <button class="btn-giant-order" id="btnStickyOrder">ĐẶT HÀNG NGAY <i class="fas fa-arrow-right"></i></button>
         </div>
 
-        <!-- Success Toast -->
-        <div class="toast" id="successToast">
-            <i class="fas fa-check-circle"></i> <span>Đặt hàng thành công!</span>
+        <!-- MULTI-STEP CHECKOUT MODAL (Bottom Sheet) -->
+        <div class="modal-overlay" id="checkoutModal">
+            <div class="bottom-sheet-content">
+                <button class="modal-close" id="btnCheckoutClose"><i class="fas fa-times"></i></button>
+                
+                <!-- STEP 1: Chọn sản phẩm -->
+                <div class="step-content active" id="step1">
+                    <div class="modal-header">
+                        <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-resize-webp:720:720.webp" alt="Thumbnail" class="modal-thumb">
+                        <div class="modal-price-info">
+                            <div class="modal-price text-primary">₫<span id="modalPrice">125.000</span></div>
+                            <div class="modal-stock" style="color:var(--text-secondary); font-size:13px;">Kho: 985</div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <!-- Phân loại sản phẩm -->
+                        <div class="form-group">
+                            <label>Khối lượng</label>
+                            <div class="option-group" id="weightOptions">
+                                <button class="option-btn active" data-price="125000">Hũ 500g</button>
+                                <button class="option-btn" data-price="240000">Hũ 1Kg</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Độ cay</label>
+                            <div class="option-group" id="spiceOptions">
+                                <button class="option-btn active">Không cay</button>
+                                <button class="option-btn">Cay vừa</button>
+                                <button class="option-btn">Siêu cay</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số lượng</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn" id="btnMinus"><i class="fas fa-minus"></i></button>
+                                <input type="number" id="qtyInput" value="1" min="1" max="99">
+                                <button class="qty-btn" id="btnPlus"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-giant-submit" id="btnToStep2">Tiếp tục điền địa chỉ <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Thông tin giao hàng -->
+                <div class="step-content" id="step2">
+                    <div class="modal-header" style="align-items:center;">
+                        <button class="icon-btn" id="btnBackToStep1" style="color:var(--text-main); background:none; border:none; font-size:20px; padding:0 10px;"><i class="fas fa-arrow-left"></i></button>
+                        <h3 style="margin:0; flex:1; text-align:center; font-size:18px;">Thông tin nhận hàng</h3>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" id="cusName" class="form-input" placeholder="Họ và tên người nhận" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="cusPhone" class="form-input" placeholder="Số điện thoại" required>
+                            <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ!</div>
+                        </div>
+                        
+                        <!-- API Address Selectors (Autocomplete) -->
+                        <div class="form-group address-group">
+                            <input type="text" id="cusProvince" list="provinceList" class="form-input" placeholder="Gõ để chọn Tỉnh/Thành phố..." required autocomplete="off">
+                            <datalist id="provinceList"></datalist>
+                            
+                            <input type="text" id="cusDistrict" list="districtList" class="form-input" placeholder="Gõ để chọn Quận/Huyện..." required disabled autocomplete="off">
+                            <datalist id="districtList"></datalist>
+                            
+                            <input type="text" id="cusWard" list="wardList" class="form-input" placeholder="Gõ để chọn Phường/Xã..." required disabled autocomplete="off">
+                            <datalist id="wardList"></datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường chi tiết..." required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú thêm (không bắt buộc)">
+                        </div>
+                        
+                        <button class="btn-giant-submit" id="btnToStep3">Xác nhận & Thanh toán <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Tóm tắt đơn hàng -->
+                <div class="step-content" id="step3">
+                    <div class="modal-header" style="align-items:center;">
+                        <button class="icon-btn" id="btnBackToStep2" style="color:var(--text-main); background:none; border:none; font-size:20px; padding:0 10px;"><i class="fas fa-arrow-left"></i></button>
+                        <h3 style="margin:0; flex:1; text-align:center; font-size:18px;">Xác nhận đơn hàng</h3>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="confirm-summary">
+                            <p><strong>Sản phẩm:</strong> <span id="confProduct"></span></p>
+                            <p><strong>Số lượng:</strong> <span id="confQty"></span></p>
+                            <p><strong>Người nhận:</strong> <span id="confName"></span> - <span id="confPhone"></span></p>
+                            <p><strong>Địa chỉ:</strong> <span id="confAddress"></span></p>
+                            <p><strong>Ghi chú:</strong> <span id="confNote"></span></p>
+                            
+                            <div class="price-summary-box" style="margin-top: 15px;">
+                                <div class="summary-row">
+                                    <span>Tạm tính:</span>
+                                    <span>₫<span id="confSubTotal"></span></span>
+                                </div>
+                                <div class="summary-row text-highlight">
+                                    <span>Phí vận chuyển:</span>
+                                    <span>0đ (Miễn phí)</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>TỔNG CỘNG:</span>
+                                    <span class="total-amount">₫<span id="confTotal"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-giant-submit" id="btnSubmitOrder" style="background:var(--primary-color);">CHỐT ĐƠN HÀNG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="successModal">
+            <div class="success-box">
+                <i class="fas fa-check-circle" style="font-size: 60px; color: #4caf50; margin-bottom:15px;"></i>
+                <h2 style="color:var(--primary-color); margin-bottom:10px;">ĐẶT HÀNG THÀNH CÔNG!</h2>
+                <p style="font-size: 15px; color: var(--text-secondary); text-align: center; margin-bottom: 20px;">
+                    Đơn hàng của bạn đã được ghi nhận và sẽ được giao đến tận nơi trong <strong>3 đến 5 ngày làm việc</strong>. 
+                    <br><br>Cảm ơn bạn đã tin tưởng Mắm Ba Khía Cà Mau 79!
+                </p>
+                <button class="btn-giant-order" id="btnSuccessClose" style="width: 100%; box-shadow:none; padding:12px; margin:0;">VỀ TRANG CHỦ</button>
+            </div>
         </div>
 
         <!-- Lightbox -->
@@ -281,6 +329,7 @@
             <div class="fomo-time" id="fomoTime">3 phút trước</div>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
