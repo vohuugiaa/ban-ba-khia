@@ -89,9 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Price Logic ----
     const updatePriceDisplay = () => {
         const subTotal = basePrice * quantity;
+        const originalPrice = basePrice * 2; // Giả sử giảm 50%
         
         if (displayPriceEl) displayPriceEl.textContent = formatCurrency(basePrice);
         if (modalPriceEl) modalPriceEl.textContent = formatCurrency(basePrice);
+        
+        const modalOrigPriceEl = document.getElementById('modalOriginalPrice');
+        if (modalOrigPriceEl) {
+            modalOrigPriceEl.textContent = formatCurrency(originalPrice);
+        }
     };
 
     // ---- Modal & Step Logic ----
@@ -542,9 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const hEl = document.getElementById('cdHours');
         const mEl = document.getElementById('cdMins');
         const sEl = document.getElementById('cdSecs');
+        const modalCdEl = document.getElementById('modalCd');
         
-        if(!hEl) return;
-
         setInterval(() => {
             if(secs > 0) secs--;
             else {
@@ -558,9 +563,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-            hEl.textContent = hours.toString().padStart(2, '0');
-            mEl.textContent = mins.toString().padStart(2, '0');
-            sEl.textContent = secs.toString().padStart(2, '0');
+            const hStr = hours.toString().padStart(2, '0');
+            const mStr = mins.toString().padStart(2, '0');
+            const sStr = secs.toString().padStart(2, '0');
+            
+            if (hEl) hEl.textContent = hStr;
+            if (mEl) mEl.textContent = mStr;
+            if (sEl) sEl.textContent = sStr;
+            if (modalCdEl) modalCdEl.textContent = `${hStr}:${mStr}:${sStr}`;
         }, 1000);
     };
     
