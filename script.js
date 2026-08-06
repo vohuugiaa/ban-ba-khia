@@ -68,8 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
 
-    const showToast = (message) => {
-        alert(message); // Fallback for simple errors
+    const showToast = (message, isError = true) => {
+        const toast = document.getElementById('appToast');
+        const icon = document.getElementById('toastIcon');
+        const msg = document.getElementById('toastMessage');
+        if (!toast || !icon || !msg) {
+            alert(message);
+            return;
+        }
+        
+        icon.innerHTML = isError ? '<i class="fas fa-exclamation-circle" style="color:#ff4d4f;"></i>' : '<i class="fas fa-check-circle" style="color:#00c675;"></i>';
+        msg.textContent = message;
+        
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
     };
 
     // ---- Price Logic ----
@@ -87,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         step1.classList.add('active');
         step2.classList.remove('active');
         step3.classList.remove('active');
+        document.body.style.overflow = 'hidden';
     };
 
     if (btnScrollToOrder) btnScrollToOrder.addEventListener('click', openCheckoutModal);
@@ -95,12 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCheckoutClose) {
         btnCheckoutClose.addEventListener('click', () => {
             checkoutModal.classList.remove('active');
+            document.body.style.overflow = '';
         });
     }
 
     if (btnSuccessClose) {
         btnSuccessClose.addEventListener('click', () => {
             successModal.classList.remove('active');
+            document.body.style.overflow = '';
         });
     }
 

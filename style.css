@@ -1023,9 +1023,14 @@ select.form-input:disabled {
 }
 .btn-giant-submit {
     animation: none;
-    background: var(--highlight-color);
-    box-shadow: 0 4px 15px rgba(46, 99, 57, 0.4);
-    font-size: 22px;
+    background: #ee4d2d !important;
+    color: #fff;
+    box-shadow: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 14px;
+    margin: 10px 0 0 0;
+    width: 100%;
 }
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -1227,4 +1232,31 @@ select.form-input:disabled {
 .confirm-summary p {
     margin: 5px 0;
     font-size: 14px;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
 }
