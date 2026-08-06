@@ -12,12 +12,7 @@
 </head>
 <body>
     <div class="app-container mientay-theme">
-        <!-- Top Hotline Banner -->
-        <header class="top-hotline">
-            <div class="hotline-text">
-                <i class="fas fa-phone-alt shake-anim"></i> Gọi đặt hàng ngay: <strong>0909.123.456</strong>
-            </div>
-        </header>
+        <!-- Top Hotline Banner Removed for cleaner UI -->
 
         <!-- Product Media Carousel -->
         <div class="product-media" id="productCarousel">
@@ -123,15 +118,44 @@
         <!-- Reviews -->
         <section class="section reviews mientay-reviews">
             <div class="section-header">
-                <h2 class="section-title">Khách hàng khen nức nở</h2>
+                <h2 class="section-title">Đánh giá sản phẩm (5.7K)</h2>
             </div>
             
             <div id="reviewsContainer">
-                <!-- JS injected reviews -->
+                <div class="review-item" style="border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:15px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">T</div>
+                        <div>
+                            <div style="font-weight:600; font-size:14px;">Trần Thị Kim Anh</div>
+                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p style="font-size:14px; margin-bottom:5px;">Mắm trộn cực kỳ ngon, vị chua ngọt vừa phải, ba khía thịt đầy và không bị mặn chát. Ăn hao cơm lắm shop ơi!</p>
+                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 500g, Cay vừa</div>
+                </div>
+                <div class="review-item" style="border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:15px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">N</div>
+                        <div>
+                            <div style="font-weight:600; font-size:14px;">Nguyễn Văn Bình</div>
+                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p style="font-size:14px; margin-bottom:5px;">Giao hàng nhanh, đóng gói túi zip sạch sẽ. Ba mẹ mình ở nhà khen ngon, sẽ ủng hộ shop tiếp.</p>
+                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 1Kg, Không cay</div>
+                </div>
+                <div class="review-item">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">L</div>
+                        <div>
+                            <div style="font-weight:600; font-size:14px;">Lê Ngọc Thảo</div>
+                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p style="font-size:14px; margin-bottom:5px;">Tuyệt vời, mắm thơm, mua về vắt thêm tí chanh với xoài băm là nhức nách.</p>
+                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 500g, Siêu cay</div>
+                </div>
             </div>
-            <button class="view-more-reviews" id="btnMoreReviews" style="display:none;">
-                Xem thêm đánh giá <i class="fas fa-chevron-down"></i>
-            </button>
         </section>
 
         <!-- INLINE ORDER FORM -->
@@ -245,6 +269,16 @@
                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
                 <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=607f11de&idc=my2&from=2378011839" class="lb-img">
             </div>
+        </div>
+    </div>
+    
+    <!-- FOMO Popup Container -->
+    <div class="fomo-popup" id="fomoPopup">
+        <div class="fomo-icon"><i class="fas fa-shopping-bag"></i></div>
+        <div class="fomo-content">
+            <div class="fomo-name" id="fomoName">Khách hàng Nguyễn Thị A</div>
+            <div class="fomo-action" id="fomoAction">Vừa đặt mua 2 hũ 500g</div>
+            <div class="fomo-time" id="fomoTime">3 phút trước</div>
         </div>
     </div>
     <script src="script.js"></script>

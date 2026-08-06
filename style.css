@@ -1,11 +1,11 @@
 :root {
-    --primary-color: #c34a2c; /* Miền Tây Clay Red / Orange */
-    --primary-light: #fbeae5;
-    --highlight-color: #2e6339; /* Coconut Green */
-    --text-main: #2a2a2a;
+    --primary-color: #d32f2f; /* Professional Red */
+    --primary-light: #ffebee;
+    --highlight-color: #f57c00; /* Professional Gold/Orange */
+    --text-main: #212121;
     --text-secondary: #555555;
-    --text-muted: #777777;
-    --bg-main: #f4eee1; /* Sand/Bamboo */
+    --text-muted: #757575;
+    --bg-main: #f5f5f5; /* Clean Grey */
     --bg-white: #ffffff;
     --border-color: rgba(0, 0, 0, 0.1);
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -1110,11 +1110,62 @@ select.form-input:disabled {
     border-top: 1px solid #e0e0e0;
     z-index: 99;
     backdrop-filter: blur(5px);
-    display: none; /* JS will toggle this */
+    display: block; /* ALWAYS SHOWN */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 .sticky-order-bar .btn-giant-order {
     margin: 0;
     padding: 15px;
-    animation: none;
-    box-shadow: none;
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+}
+
+/* FOMO Popup */
+.fomo-popup {
+    position: fixed;
+    top: 20px;
+    left: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    transform: translateY(-150%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.fomo-popup.show {
+    transform: translateY(0);
+}
+.fomo-icon {
+    width: 32px;
+    height: 32px;
+    background: #4caf50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.fomo-content {
+    flex: 1;
+}
+.fomo-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffd700;
+}
+.fomo-action {
+    font-size: 13px;
+    color: #e0e0e0;
+}
+.fomo-time {
+    font-size: 11px;
+    color: #9e9e9e;
+    margin-top: 2px;
 }

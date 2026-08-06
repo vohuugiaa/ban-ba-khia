@@ -78,17 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnScrollToOrder) btnScrollToOrder.addEventListener('click', scrollToOrder);
     if (btnStickyOrder) btnStickyOrder.addEventListener('click', scrollToOrder);
 
-    // Show/Hide Sticky Order Bar on Scroll
-    window.addEventListener('scroll', () => {
-        const heroBottom = document.querySelector('.product-info').getBoundingClientRect().bottom;
-        const formTop = orderSection.getBoundingClientRect().top;
-        
-        if (heroBottom < 0 && formTop > window.innerHeight) {
-            stickyOrderBar.style.display = 'block';
-        } else {
-            stickyOrderBar.style.display = 'none';
-        }
-    });
+    // Sticky Order Bar is now purely CSS driven (always visible)
 
     // Options
     weightBtns.forEach(btn => {
@@ -459,4 +449,45 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setCountdown();
     updatePriceDisplay();
+
+    // ---- FOMO Logic ----
+    const fomoPopup = document.getElementById('fomoPopup');
+    const fomoName = document.getElementById('fomoName');
+    const fomoAction = document.getElementById('fomoAction');
+    const fomoTime = document.getElementById('fomoTime');
+    
+    const fomoData = [
+        { name: 'Chị Lan (TP.HCM)', action: 'Vừa đặt mua 2 hũ 500g' },
+        { name: 'Anh Tuấn (Hà Nội)', action: 'Vừa mua 1 hũ 1Kg (Cay vừa)' },
+        { name: 'Cô Oanh (Cà Mau)', action: 'Vừa chốt đơn 3 hũ 500g' },
+        { name: 'Chị Mai (Bình Dương)', action: 'Vừa đặt mua 1 hũ 500g (Siêu cay)' },
+        { name: 'Chú Hùng (Đồng Nai)', action: 'Vừa chốt 2 hũ 1Kg' },
+        { name: 'Em Yến (Cần Thơ)', action: 'Vừa đặt mua 1 hũ 500g' },
+        { name: 'Khách hàng (Vũng Tàu)', action: 'Vừa đặt mua 2 hũ 500g' }
+    ];
+
+    const showRandomFomo = () => {
+        if (!fomoPopup) return;
+        
+        const randomItem = fomoData[Math.floor(Math.random() * fomoData.length)];
+        const randomMins = Math.floor(Math.random() * 15) + 1; // 1-15 mins ago
+        
+        fomoName.textContent = randomItem.name;
+        fomoAction.textContent = randomItem.action;
+        fomoTime.textContent = `${randomMins} phút trước`;
+        
+        fomoPopup.classList.add('show');
+        
+        // Hide after 4 seconds
+        setTimeout(() => {
+            fomoPopup.classList.remove('show');
+        }, 4000);
+    };
+
+    // Initial delay then trigger every 15 seconds
+    setTimeout(() => {
+        showRandomFomo();
+        setInterval(showRandomFomo, 15000);
+    }, 5000);
+
 });
