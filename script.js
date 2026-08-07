@@ -120,6 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         step2.classList.remove('active');
         step3.classList.remove('active');
         document.body.style.overflow = 'hidden';
+        
+        const fomo = document.getElementById('fomoPopup');
+        if (fomo) fomo.classList.remove('show');
+        
         history.pushState({ modalOpen: true }, '', '#checkout');
     };
 
@@ -595,6 +599,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const showRandomFomo = () => {
         if (!fomoPopup) return;
+        
+        // Prevent showing FOMO when modal is active
+        if (checkoutModal.classList.contains('active') || successModal.classList.contains('active')) {
+            return;
+        }
         
         const randomItem = fomoData[Math.floor(Math.random() * fomoData.length)];
         const randomMins = Math.floor(Math.random() * 15) + 1; // 1-15 mins ago
