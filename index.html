@@ -51,7 +51,7 @@
             </div>
             
             <h1 class="product-title mientay-title">
-                Đặc sản Mắm Ba Khía Sữa Trộn Sẵn Chuẩn Vị Nam Bộ
+                <span class="mall-badge" style="background: var(--primary-color);">ĐẶC SẢN CÀ MAU</span>Đặc sản Mắm Ba Khía Sữa Trộn Sẵn Chuẩn Vị Nam Bộ
             </h1>
             
             <div class="stats-container">
@@ -61,7 +61,38 @@
                     <i class="fas fa-star" style="color: #FFD700;"></i>
                     <i class="fas fa-star" style="color: #FFD700;"></i>
                     <i class="fas fa-star" style="color: #FFD700;"></i>
-                    <span>(Hơn 5.700 cô bác đã mua)</span>
+                    <span style="color:var(--text-main); font-weight:600; margin-left:4px;">4.9</span>
+                </div>
+                <div class="divider">|</div>
+                <div class="sales-count" style="color:var(--text-main);">
+                    Đã bán <span style="color:var(--primary-color); font-weight:700;">110,4K</span>
+                </div>
+            </div>
+
+            <!-- Vouchers Slider -->
+            <div class="vouchers-wrapper" style="margin-top: 15px; overflow-x: auto; scrollbar-width: none;">
+                <div class="vouchers-scroll" style="display: flex; gap: 10px; width: max-content; padding-bottom: 5px;">
+                    <div class="voucher-ticket">
+                        <div class="v-left">
+                            <div class="v-title">Giảm 10K</div>
+                            <div class="v-desc">Đơn tối thiểu 99K</div>
+                        </div>
+                        <div class="v-right" onclick="this.textContent='Đã lưu'; this.style.color='#aaa';">Lưu</div>
+                    </div>
+                    <div class="voucher-ticket">
+                        <div class="v-left">
+                            <div class="v-title">Giảm 20K</div>
+                            <div class="v-desc">Đơn tối thiểu 199K</div>
+                        </div>
+                        <div class="v-right" onclick="this.textContent='Đã lưu'; this.style.color='#aaa';">Lưu</div>
+                    </div>
+                    <div class="voucher-ticket">
+                        <div class="v-left">
+                            <div class="v-title">Freeship</div>
+                            <div class="v-desc">Mọi đơn hàng</div>
+                        </div>
+                        <div class="v-right" onclick="this.textContent='Đã lưu'; this.style.color='#aaa';">Lưu</div>
+                    </div>
                 </div>
             </div>
             
@@ -71,18 +102,28 @@
 
         <!-- USPs (Lý do nên mua) -->
         <section class="section usps mientay-usps">
-            <div class="usp-list">
-                <div class="usp-item">
-                    <i class="fas fa-check-circle text-primary"></i>
-                    <span>Gia truyền chính gốc Cà Mau, chua ngọt siêu tốn cơm.</span>
+            <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--text-main);">Cam Kết Từ Chúng Tôi</h3>
+            <div class="usp-grid">
+                <div class="usp-card">
+                    <div class="usp-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="usp-text">
+                        <strong>Ăn là ghiền</strong>
+                        Gia truyền Cà Mau, chua ngọt siêu tốn cơm.
+                    </div>
                 </div>
-                <div class="usp-item">
-                    <i class="fas fa-shield-alt text-primary"></i>
-                    <span>Đóng túi Zip cẩn thận, sạch sẽ, an toàn vệ sinh.</span>
+                <div class="usp-card">
+                    <div class="usp-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="usp-text">
+                        <strong>Sạch sẽ 100%</strong>
+                        Đóng túi Zip cẩn thận, an toàn vệ sinh.
+                    </div>
                 </div>
-                <div class="usp-item">
-                    <i class="fas fa-truck text-primary"></i>
-                    <span>Nhận hàng kiểm tra thoải mái rồi mới thanh toán.</span>
+                <div class="usp-card">
+                    <div class="usp-icon"><i class="fas fa-truck"></i></div>
+                    <div class="usp-text">
+                        <strong>Kiểm tra thoải mái</strong>
+                        Nhận hàng đồng kiểm, ưng mới thanh toán.
+                    </div>
                 </div>
             </div>
         </section>
@@ -122,38 +163,48 @@
             </div>
             
             <div id="reviewsContainer">
-                <div class="review-item" style="border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:15px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">T</div>
-                        <div>
-                            <div style="font-weight:600; font-size:14px;">Trần Thị Kim Anh</div>
-                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="review-item">
+                    <div class="r-user-info">
+                        <div class="r-avatar">T</div>
+                        <div class="r-meta">
+                            <div class="r-name">Trần Thị Kim Anh</div>
+                            <div class="r-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
+                        <div class="r-date">Hôm qua</div>
                     </div>
-                    <p style="font-size:14px; margin-bottom:5px;">Mắm trộn cực kỳ ngon, vị chua ngọt vừa phải, ba khía thịt đầy và không bị mặn chát. Ăn hao cơm lắm shop ơi!</p>
-                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 500g, Cay vừa</div>
-                </div>
-                <div class="review-item" style="border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:15px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">N</div>
-                        <div>
-                            <div style="font-weight:600; font-size:14px;">Nguyễn Văn Bình</div>
-                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        </div>
+                    <div class="r-variant">Phân loại: Hũ 500g, Cay vừa</div>
+                    <p class="r-content">Mắm trộn cực kỳ ngon, vị chua ngọt vừa phải, ba khía thịt đầy và không bị mặn chát. Ăn hao cơm lắm shop ơi!</p>
+                    <div class="r-images">
+                        <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/b7b19741130145d9ac48462c5b6390ce~tplv-o3syd03w52-resize-webp:800:800.webp" class="r-img" onclick="document.getElementById('productCarousel').scrollIntoView();">
                     </div>
-                    <p style="font-size:14px; margin-bottom:5px;">Giao hàng nhanh, đóng gói túi zip sạch sẽ. Ba mẹ mình ở nhà khen ngon, sẽ ủng hộ shop tiếp.</p>
-                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 1Kg, Không cay</div>
                 </div>
                 <div class="review-item">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-                        <div style="width:36px; height:36px; background:#e0e0e0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">L</div>
-                        <div>
-                            <div style="font-weight:600; font-size:14px;">Lê Ngọc Thảo</div>
-                            <div style="color:#FFD700; font-size:12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="r-user-info">
+                        <div class="r-avatar">N</div>
+                        <div class="r-meta">
+                            <div class="r-name">Nguyễn Văn Bình</div>
+                            <div class="r-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
+                        <div class="r-date">2 ngày trước</div>
                     </div>
-                    <p style="font-size:14px; margin-bottom:5px;">Tuyệt vời, mắm thơm, mua về vắt thêm tí chanh với xoài băm là nhức nách.</p>
-                    <div style="color:#757575; font-size:12px;">Phân loại: Hũ 500g, Siêu cay</div>
+                    <div class="r-variant">Phân loại: Hũ 1Kg, Không cay</div>
+                    <p class="r-content">Giao hàng nhanh, đóng gói túi zip sạch sẽ. Ba mẹ mình ở nhà khen ngon, sẽ ủng hộ shop tiếp.</p>
+                </div>
+                <div class="review-item">
+                    <div class="r-user-info">
+                        <div class="r-avatar">L</div>
+                        <div class="r-meta">
+                            <div class="r-name">Lê Ngọc Thảo</div>
+                            <div class="r-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                        <div class="r-date">03/10/2023</div>
+                    </div>
+                    <div class="r-variant">Phân loại: Hũ 500g, Siêu cay</div>
+                    <p class="r-content">Tuyệt vời, mắm thơm, mua về vắt thêm tí chanh với xoài băm là nhức nách.</p>
+                    <div class="r-images">
+                        <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/a61e8eadafcf4975903a87bf037d49b9~tplv-o3syd03w52-resize-webp:800:800.webp" class="r-img" onclick="document.getElementById('productCarousel').scrollIntoView();">
+                        <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/90e0cc364c72443bb4a137b16b428103~tplv-o3syd03w52-resize-webp:800:800.webp" class="r-img" onclick="document.getElementById('productCarousel').scrollIntoView();">
+                    </div>
                 </div>
             </div>
         </section>

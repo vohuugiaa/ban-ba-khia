@@ -758,16 +758,17 @@ select.form-input:disabled {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
 }
-.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
 .carousel-img {
-    flex: 0 0 100%;
     width: 100%;
-    aspect-ratio: 1/1;
+    flex-shrink: 0;
+    scroll-snap-align: center;
     object-fit: cover;
-    scroll-snap-align: start;
+    aspect-ratio: 1/1;
     cursor: pointer;
 }
 
@@ -1258,4 +1259,142 @@ select.form-input:disabled {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
     visibility: visible;
+}
+
+/* ====== VOUCHERS ====== */
+.voucher-ticket {
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    overflow: hidden;
+    min-width: 160px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.v-left {
+    padding: 8px;
+    flex: 1;
+    border-right: 1px dashed var(--primary-light);
+    background: #fffafa;
+}
+.v-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 13px;
+}
+.v-desc {
+    color: var(--text-secondary);
+    font-size: 11px;
+    margin-top: 2px;
+}
+.v-right {
+    padding: 8px 12px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ====== USP GRID ====== */
+.usp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.usp-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f0;
+}
+.usp-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+.usp-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+.usp-text strong {
+    display: block;
+    color: var(--text-main);
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+/* ====== NEW REVIEWS ====== */
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.r-user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.r-avatar {
+    width: 36px;
+    height: 36px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.r-meta {
+    flex: 1;
+}
+.r-name {
+    font-weight: 600;
+    font-size: 13px;
+}
+.r-stars {
+    color: #FFD700;
+    font-size: 10px;
+    margin-top: 2px;
+}
+.r-date {
+    font-size: 11px;
+    color: #999;
+}
+.r-variant {
+    font-size: 11px;
+    color: #757575;
+    margin-bottom: 6px;
+}
+.r-content {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+.r-images {
+    display: flex;
+    gap: 8px;
+}
+.r-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
 }
