@@ -312,7 +312,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 50);
         }
+        if(localStorage.getItem('cusNote')) cusNote.value = localStorage.getItem('cusNote');
     };
+
+    // Auto-save on input
+    const inputsToAutoSave = [
+        { el: cusName, key: 'cusName' },
+        { el: cusPhone, key: 'cusPhone' },
+        { el: cusAddressDetail, key: 'cusAddressDetail' },
+        { el: cusProvince, key: 'cusProvince' },
+        { el: cusDistrict, key: 'cusDistrict' },
+        { el: cusWard, key: 'cusWard' },
+        { el: cusNote, key: 'cusNote' }
+    ];
+    inputsToAutoSave.forEach(item => {
+        if (item.el) {
+            item.el.addEventListener('input', () => {
+                localStorage.setItem(item.key, item.el.value.trim());
+            });
+        }
+    });
 
     let selectedProvinceCode = null;
     let selectedDistrictCode = null;
