@@ -452,19 +452,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     successModal.classList.add('active');
                     history.pushState({ modalOpen: true }, '', '#success');
                     
-                    // Reset form slightly later
+                    // Keep form data intact for next orders
                     setTimeout(() => {
-                        cusName.value = '';
-                        cusPhone.value = '';
-                        cusAddressDetail.value = '';
-                        cusNote.value = '';
                         qtyInput.value = 1;
                         quantity = 1;
-                        cusProvince.value = '';
-                        cusDistrict.value = '';
-                        cusDistrict.disabled = true;
-                        cusWard.value = '';
-                        cusWard.disabled = true;
+                        cusNote.value = '';
+                        updatePriceDisplay();
                         
                         btnSubmitOrder.innerHTML = 'CHỐT ĐƠN HÀNG';
                         btnSubmitOrder.disabled = false;
