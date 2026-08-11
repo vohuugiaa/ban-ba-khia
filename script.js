@@ -102,10 +102,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const hintEl = document.getElementById('shippingHint');
         if (hintEl) {
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
-                hintEl.innerHTML = `<strong>Tổng: ${formatCurrency(subTotal)}đ</strong> + 0đ phí ship (Được Miễn Phí Ship) = <strong style="color:var(--primary-color)">${formatCurrency(subTotal)}đ</strong>`;
+                hintEl.innerHTML = `
+                    <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px;">
+                            <span style="color: var(--text-secondary);">Tạm tính:</span>
+                            <span style="font-weight: 500; color: var(--text-main);">${formatCurrency(subTotal)}đ</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                            <span style="color: var(--text-secondary);">Phí giao hàng:</span>
+                            <span style="color: #059669; font-weight: 600;">Miễn phí</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px dashed #e2e8f0;">
+                            <span style="font-weight: bold; color: var(--text-main); font-size: 15px;">Tổng thanh toán:</span>
+                            <span style="font-size: 18px; font-weight: 800; color: var(--primary-color);">${formatCurrency(subTotal)}đ</span>
+                        </div>
+                    </div>
+                    <div style="background: #f0fdf4; color: #15803d; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #bbf7d0;">
+                        <i class="fas fa-check-circle"></i> Đơn hàng đã được Miễn Phí Ship
+                    </div>
+                `;
             } else {
                 const total = subTotal + 20000;
-                hintEl.innerHTML = `<strong>Tổng: ${formatCurrency(subTotal)}đ</strong> + 20.000đ phí ship = <strong style="color:var(--primary-color)">${formatCurrency(total)}đ</strong> <br><span style="color:#ff4d4f; font-weight:bold; margin-top:5px; display:inline-block">💡 Gợi ý: Mua Combo 2 Hũ để được Miễn Phí Ship!</span>`;
+                hintEl.innerHTML = `
+                    <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px;">
+                            <span style="color: var(--text-secondary);">Tạm tính:</span>
+                            <span style="font-weight: 500; color: var(--text-main);">${formatCurrency(subTotal)}đ</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                            <span style="color: var(--text-secondary);">Phí giao hàng:</span>
+                            <span style="color: var(--text-main); font-weight: 500;">20.000đ</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px dashed #e2e8f0;">
+                            <span style="font-weight: bold; color: var(--text-main); font-size: 15px;">Tổng thanh toán:</span>
+                            <span style="font-size: 18px; font-weight: 800; color: var(--primary-color);">${formatCurrency(total)}đ</span>
+                        </div>
+                    </div>
+                    <div onclick="document.querySelectorAll('.option-btn')[1].click()" style="background: #fef2f2; color: #dc2626; padding: 10px 12px; border-radius: 6px; font-size: 13.5px; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #fecaca; cursor: pointer; transition: 0.2s;">
+                        <i class="fas fa-gift"></i> Bấm chọn Combo 2 Hũ để Freeship!
+                    </div>
+                `;
             }
         }
     };
