@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
-    let basePrice = 110000;
+    let basePrice = 158000;
     let quantity = 1;
     let selectedWeightText = '🔥 Combo 2 Hũ (Freeship)';
     
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             } else {
-                const total = subTotal + 20000;
+                const total = subTotal + 25000;
                 hintEl.innerHTML = `
                     <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px;">
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
                             <span style="color: var(--text-secondary);">Phí giao hàng:</span>
-                            <span style="color: var(--text-main); font-weight: 500;">20.000đ</span>
+                            <span style="color: var(--text-main); font-weight: 500;">25.000đ</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px dashed #e2e8f0;">
                             <span style="font-weight: bold; color: var(--text-main); font-size: 15px;">Tổng thanh toán:</span>
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (s2Product && s2Total) {
                 s2Product.textContent = `${selectedWeightText} x ${quantity}`;
                 const subTotal = basePrice * quantity;
-                let shipFee = 20000;
+                let shipFee = 25000;
                 if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                     shipFee = 0;
                 }
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
             const productName = `${selectedWeightText}`;
             
-            let shipFee = 20000;
+            let shipFee = 25000;
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                 shipFee = 0;
             }
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (shipFee === 0) {
                     confShipping.textContent = '0đ (Miễn phí)';
                 } else {
-                    confShipping.textContent = '20.000đ (Mua thêm 1 hũ để được Freeship)';
+                    confShipping.textContent = '25.000đ (Mua thêm 1 hũ để được Freeship)';
                 }
             }
             confTotal.textContent = formatCurrency(total);
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
             const productName = `${selectedWeightText}`;
             
-            let shipFee = 20000;
+            let shipFee = 25000;
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                 shipFee = 0;
             }
