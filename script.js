@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
-    let basePrice = 158000;
+    let basePrice = 79000;
     let quantity = 1;
-    let selectedWeightText = '🔥 Combo 2 Hũ (Freeship)';
+    let selectedWeightText = '1 Hũ 700g';
     
     // Address data
     let provincesData = [];
