@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
-    let basePrice = 125000;
+    let basePrice = 55000;
     let quantity = 1;
-    let selectedWeightText = 'Hũ 500g';
+    let selectedWeightText = '1 Hũ 500g';
     let selectedSpiceText = 'Không cay';
     
     // Address data
@@ -208,7 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate Summary
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
             const productName = `${selectedWeightText}, ${selectedSpiceText}`;
-            const total = basePrice * quantity;
+            
+            let shipFee = 20000;
+            if (quantity >= 2 || selectedWeightText.includes('Combo')) {
+                shipFee = 0;
+            }
+            const subTotal = basePrice * quantity;
+            const total = subTotal + shipFee;
 
             confProduct.textContent = productName;
             confQty.textContent = quantity;
@@ -216,7 +222,16 @@ document.addEventListener('DOMContentLoaded', () => {
             confPhone.textContent = phone;
             confAddress.textContent = fullAddress;
             confNote.textContent = note;
-            confSubTotal.textContent = formatCurrency(total);
+            
+            confSubTotal.textContent = formatCurrency(subTotal);
+            const confShipping = document.getElementById('confShipping');
+            if (confShipping) {
+                if (shipFee === 0) {
+                    confShipping.textContent = '0đ (Miễn phí)';
+                } else {
+                    confShipping.textContent = '20.000đ (Mua thêm 1 hũ để được Freeship)';
+                }
+            }
             confTotal.textContent = formatCurrency(total);
 
             // Go to Step 3
@@ -426,7 +441,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
             const productName = `${selectedWeightText}, ${selectedSpiceText}`;
-            const total = basePrice * quantity;
+            
+            let shipFee = 20000;
+            if (quantity >= 2 || selectedWeightText.includes('Combo')) {
+                shipFee = 0;
+            }
+            const total = (basePrice * quantity) + shipFee;
 
             btnSubmitOrder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi đơn...';
             btnSubmitOrder.disabled = true;
