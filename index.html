@@ -245,8 +245,8 @@
                         <img src="https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/d5677658e1a54604bffb402596b86bc5~tplv-o3syd03w52-resize-webp:720:720.webp" alt="Thumbnail" class="modal-thumb">
                         <div class="modal-price-info">
                             <div class="modal-price text-primary">
-                                ₫<span id="modalPrice">55.000</span>
-                                <span class="modal-original-price">₫<span id="modalOriginalPrice">110.000</span></span>
+                                ₫<span id="modalPrice">110.000</span>
+                                <span class="modal-original-price">₫<span id="modalOriginalPrice">220.000</span></span>
                                 <span class="modal-discount-badge">-50%</span>
                             </div>
                             <div class="modal-stock" style="color:var(--text-secondary); font-size:13px; margin-top:2px;">Kho: 985</div>
@@ -261,29 +261,24 @@
                         <div class="form-group">
                             <label>Khối lượng</label>
                             <div class="option-group" id="weightOptions">
-                                <button class="option-btn active" data-price="55000">1 Hũ 500g</button>
-                                <button class="option-btn" data-price="110000" style="color: var(--primary-color); border-color: var(--primary-color); font-weight: bold;">🔥 Combo 2 Hũ (Freeship)</button>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Độ cay</label>
-                            <div class="option-group" id="spiceOptions">
-                                <button class="option-btn active">Không cay</button>
-                                <button class="option-btn">Cay vừa</button>
-                                <button class="option-btn">Siêu cay</button>
+                                <button class="option-btn" data-price="55000">1 Hũ 500g</button>
+                                <button class="option-btn active" data-price="110000" style="color: var(--primary-color); border-color: var(--primary-color); font-weight: bold;">🔥 Combo 2 Hũ (Freeship)</button>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Số lượng</label>
                             <div class="quantity-selector">
-                                <button class="qty-btn" id="btnMinus"><i class="fas fa-minus"></i></button>
-                                <input type="number" id="qtyInput" value="1" min="1" max="99">
-                                <button class="qty-btn" id="btnPlus"><i class="fas fa-plus"></i></button>
+                                <button class="qty-btn" id="btnMinus">-</button>
+                                <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="99">
+                                <button class="qty-btn" id="btnPlus">+</button>
                             </div>
                         </div>
                         
+                        <div id="shippingHint" style="padding: 10px; background: #fffafa; border: 1px dashed var(--primary-light); border-radius: 6px; font-size: 13px; color: var(--text-main); margin-bottom: 15px;">
+                            <!-- Dynamic hint here -->
+                        </div>
+
                         <button class="btn-giant-submit" id="btnToStep2">Tiếp tục điền địa chỉ <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>

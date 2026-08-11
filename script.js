@@ -53,10 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
-    let basePrice = 55000;
+    let basePrice = 110000;
     let quantity = 1;
-    let selectedWeightText = '1 Hũ 500g';
-    let selectedSpiceText = 'Không cay';
+    let selectedWeightText = '🔥 Combo 2 Hũ (Freeship)';
     
     // Address data
     let provincesData = [];
@@ -98,7 +97,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalOrigPriceEl) {
             modalOrigPriceEl.textContent = formatCurrency(originalPrice);
         }
+        
+        // Update shipping hint
+        const hintEl = document.getElementById('shippingHint');
+        if (hintEl) {
+            if (quantity >= 2 || selectedWeightText.includes('Combo')) {
+                hintEl.innerHTML = `<strong>Tổng: ${formatCurrency(subTotal)}đ</strong> + 0đ phí ship (Được Miễn Phí Ship) = <strong style="color:var(--primary-color)">${formatCurrency(subTotal)}đ</strong>`;
+            } else {
+                const total = subTotal + 20000;
+                hintEl.innerHTML = `<strong>Tổng: ${formatCurrency(subTotal)}đ</strong> + 20.000đ phí ship = <strong style="color:var(--primary-color)">${formatCurrency(total)}đ</strong> <br><span style="color:#ff4d4f; font-weight:bold; margin-top:5px; display:inline-block">💡 Gợi ý: Mua Combo 2 Hũ để được Miễn Phí Ship!</span>`;
+            }
+        }
     };
+    
+    // Initialize display on load
+    updatePriceDisplay();
 
     // ---- Modal & Step Logic ----
     
@@ -207,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Populate Summary
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
-            const productName = `${selectedWeightText}, ${selectedSpiceText}`;
+            const productName = `${selectedWeightText}`;
             
             let shipFee = 20000;
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
@@ -257,15 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
             basePrice = parseInt(this.getAttribute('data-price'));
             selectedWeightText = this.textContent;
             updatePriceDisplay();
-        });
-    });
-
-    spiceBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            spiceBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            selectedSpiceText = this.textContent;
         });
     });
 
@@ -440,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const note = cusNote.value.trim() || 'Không có';
 
             const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
-            const productName = `${selectedWeightText}, ${selectedSpiceText}`;
+            const productName = `${selectedWeightText}`;
             
             let shipFee = 20000;
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
