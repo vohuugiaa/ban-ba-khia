@@ -102,15 +102,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const hintEl = document.getElementById('shippingHint');
         if (hintEl) {
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
+                let savings = 25000; // Freeship saving
+                if (selectedWeightText.includes('Combo')) {
+                    savings += 8000 * quantity; // Discount saving
+                }
                 hintEl.innerHTML = `
                     <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px;">
                             <span style="color: var(--text-secondary);">Tạm tính:</span>
                             <span style="font-weight: 500; color: var(--text-main);">${formatCurrency(subTotal)}đ</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px;">
                             <span style="color: var(--text-secondary);">Phí giao hàng:</span>
                             <span style="color: #059669; font-weight: 600;">Miễn phí</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                            <span style="color: var(--text-secondary);">Tiết kiệm được:</span>
+                            <span style="color: #dc2626; font-weight: 600;">-${formatCurrency(savings)}đ</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px dashed #e2e8f0;">
                             <span style="font-weight: bold; color: var(--text-main); font-size: 15px;">Tổng thanh toán:</span>
@@ -206,12 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const s2Product = document.getElementById('s2Product');
             const s2Total = document.getElementById('s2Total');
             if (s2Product && s2Total) {
-                s2Product.textContent = `${selectedWeightText} x ${quantity}`;
                 const subTotal = basePrice * quantity;
                 let shipFee = 25000;
+                let savingsText = '';
                 if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                     shipFee = 0;
+                    let savings = 25000;
+                    if (selectedWeightText.includes('Combo')) savings += 8000 * quantity;
+                    savingsText = `<div style="font-size: 13px; color: #dc2626; margin-top: 4px; font-weight: 500;">🎁 Tiết kiệm: -${formatCurrency(savings)}đ</div>`;
                 }
+                s2Product.innerHTML = `${selectedWeightText} x ${quantity}${savingsText}`;
                 s2Total.textContent = formatCurrency(subTotal + shipFee) + 'đ';
             }
             
