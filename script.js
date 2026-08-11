@@ -166,6 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step 1 -> 2
     if (btnToStep2) {
         btnToStep2.addEventListener('click', () => {
+            // Update Step 2 Mini Summary
+            const s2Product = document.getElementById('s2Product');
+            const s2Total = document.getElementById('s2Total');
+            if (s2Product && s2Total) {
+                s2Product.textContent = `${selectedWeightText} x ${quantity}`;
+                const subTotal = basePrice * quantity;
+                let shipFee = 20000;
+                if (quantity >= 2 || selectedWeightText.includes('Combo')) {
+                    shipFee = 0;
+                }
+                s2Total.textContent = formatCurrency(subTotal + shipFee) + 'đ';
+            }
+            
             step1.classList.remove('active');
             step2.classList.add('active');
         });
