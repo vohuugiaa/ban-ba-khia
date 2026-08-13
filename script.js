@@ -181,6 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const fomo = document.getElementById('fomoPopup');
         if (fomo) fomo.classList.remove('show');
         
+        if (typeof fbq === 'function') {
+            fbq('track', 'InitiateCheckout');
+        }
+        
         history.pushState({ modalOpen: true }, '', '#checkout');
     };
 
@@ -531,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Fire Tracking Pixels (FB/TikTok) here if they exist
             if (typeof fbq === 'function') {
-                // fbq('track', 'Purchase', {value: total, currency: 'VND'});
+                fbq('track', 'Purchase', {value: total, currency: 'VND'});
             }
             if (typeof ttq === 'function') {
                 // ttq.track('CompletePayment', {value: total, currency: 'VND'});
