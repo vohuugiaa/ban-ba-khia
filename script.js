@@ -247,11 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (cusPhone) {
-        cusPhone.addEventListener('input', function() {
+        cusPhone.addEventListener('blur', function() {
             if (this.value.trim() && !isValidPhone(this.value.trim())) {
                 this.classList.add('error');
                 phoneError.classList.add('show');
-            } else {
+            }
+        });
+        cusPhone.addEventListener('input', function() {
+            if (isValidPhone(this.value.trim())) {
                 this.classList.remove('error');
                 phoneError.classList.remove('show');
             }
