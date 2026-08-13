@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
-    let basePrice = 79000;
+    let basePrice = 89000;
     let quantity = 1;
     let selectedWeightText = '1 Hũ 700g';
     
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                 let savings = 25000; // Freeship saving
                 if (selectedWeightText.includes('Combo')) {
-                    savings += 8000 * quantity; // Discount saving
+                    savings += 9000 * quantity; // Discount saving
                 }
                 hintEl.innerHTML = `
                     <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (quantity >= 2 || selectedWeightText.includes('Combo')) {
                     shipFee = 0;
                     let savings = 25000;
-                    if (selectedWeightText.includes('Combo')) savings += 8000 * quantity;
+                    if (selectedWeightText.includes('Combo')) savings += 9000 * quantity;
                     savingsText = `<div style="font-size: 13px; color: #dc2626; margin-top: 4px; font-weight: 500;">🎁 Tiết kiệm: -${formatCurrency(savings)}đ</div>`;
                 }
                 s2Product.innerHTML = `${selectedWeightText} x ${quantity}${savingsText}`;
