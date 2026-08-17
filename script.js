@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const successModal = document.getElementById('successModal');
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
-    const step3 = document.getElementById('step3');
     
     // Buttons
     const btnScrollToOrder = document.getElementById('btnScrollToOrder');
@@ -37,19 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const btnToStep2 = document.getElementById('btnToStep2');
     const btnBackToStep1 = document.getElementById('btnBackToStep1');
-    const btnToStep3 = document.getElementById('btnToStep3');
-    const btnBackToStep2 = document.getElementById('btnBackToStep2');
     const btnSubmitOrder = document.getElementById('btnSubmitOrder');
-
-    // Confirm Summary Fields
-    const confProduct = document.getElementById('confProduct');
-    const confQty = document.getElementById('confQty');
-    const confName = document.getElementById('confName');
-    const confPhone = document.getElementById('confPhone');
-    const confAddress = document.getElementById('confAddress');
-    const confNote = document.getElementById('confNote');
-    const confSubTotal = document.getElementById('confSubTotal');
-    const confTotal = document.getElementById('confTotal');
 
     // ---- State ----
     let basePrice = 89000;
@@ -172,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutModal.classList.add('active');
         step1.classList.add('active');
         step2.classList.remove('active');
-        step3.classList.remove('active');
         document.body.style.overflow = 'hidden';
         
         const fomo = document.getElementById('fomoPopup');
@@ -262,67 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Step 2 -> 3 (Validation & Summary)
-    if (btnToStep3) {
-        btnToStep3.addEventListener('click', () => {
-            const name = cusName.value.trim();
-            const phone = cusPhone.value.trim();
-            const detail = cusAddressDetail.value.trim();
-            const location = cusLocationSearch.value.trim();
-            const note = cusNote.value.trim() || 'Không có';
-
-            if (!name) return showToast('Vui lòng nhập họ và tên!');
-            if (!phone || !isValidPhone(phone)) {
-                cusPhone.classList.add('error');
-                phoneError.classList.add('show');
-                return showToast('Số điện thoại không hợp lệ!');
-            }
-            if (!detail || !location) {
-                return showToast('Vui lòng nhập đầy đủ địa chỉ giao hàng!');
-            }
-
-            // Populate Summary
-            const fullAddress = `${detail}, ${location}`;
-            const productName = `${selectedWeightText}`;
-            
-            let shipFee = 25000;
-            if (quantity >= 2 || selectedWeightText.includes('Combo')) {
-                shipFee = 0;
-            }
-            const subTotal = basePrice * quantity;
-            const total = subTotal + shipFee;
-
-            confProduct.textContent = productName;
-            confQty.textContent = quantity;
-            confName.textContent = name;
-            confPhone.textContent = phone;
-            confAddress.textContent = fullAddress;
-            confNote.textContent = note;
-            
-            confSubTotal.textContent = formatCurrency(subTotal);
-            const confShipping = document.getElementById('confShipping');
-            if (confShipping) {
-                if (shipFee === 0) {
-                    confShipping.textContent = '0đ (Miễn phí)';
-                } else {
-                    confShipping.textContent = '25.000đ (Mua thêm 1 hũ để được Freeship)';
-                }
-            }
-            confTotal.textContent = formatCurrency(total);
-
-            // Go to Step 3
-            step2.classList.remove('active');
-            step3.classList.add('active');
-        });
-    }
-
-    // Step 3 -> 2
-    if (btnBackToStep2) {
-        btnBackToStep2.addEventListener('click', () => {
-            step3.classList.remove('active');
-            step2.classList.add('active');
-        });
-    }
+    // Removed Step 3 logic
 
     // Options
     weightBtns.forEach(btn => {
@@ -481,6 +407,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const location = cusLocationSearch.value.trim();
             const note = cusNote.value.trim() || 'Không có';
 
+            if (!name) return showToast('Vui lòng nhập họ và tên!');
+            if (!phone || !isValidPhone(phone)) {
+                if (cusPhone) cusPhone.classList.add('error');
+                if (phoneError) phoneError.classList.add('show');
+                return showToast('Số điện thoại không hợp lệ!');
+            }
+            if (!detail || !location) {
+                return showToast('Vui lòng nhập đầy đủ địa chỉ giao hàng!');
+            }
+
             const fullAddress = `${detail}, ${location}`;
             const productName = `${selectedWeightText}`;
             
@@ -538,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         cusNote.value = '';
                         updatePriceDisplay();
                         
-                        btnSubmitOrder.innerHTML = 'CHỐT ĐƠN HÀNG';
+                        btnSubmitOrder.innerHTML = '<i class="fas fa-check-circle"></i> XÁC NHẬN CHỐT ĐƠN NGAY';
                         btnSubmitOrder.disabled = false;
                         updatePriceDisplay();
                     }, 1500);
@@ -549,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error submitting order:', error);
                 showToast('Có lỗi xảy ra, vui lòng thử lại sau!');
-                btnSubmitOrder.innerHTML = 'CHỐT ĐƠN HÀNG';
+                btnSubmitOrder.innerHTML = '<i class="fas fa-check-circle"></i> XÁC NHẬN CHỐT ĐƠN NGAY';
                 btnSubmitOrder.disabled = false;
             });
         });

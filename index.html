@@ -37,6 +37,22 @@
         .suggestion-item:active {
             background: #f0fdf4;
         }
+        
+        /* Animation cho nút Chốt Đơn */
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .pulse-btn {
+            animation: pulseGlow 1.5s infinite;
+            background: linear-gradient(45deg, #dc2626, #ef4444) !important;
+            border: none !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            letter-spacing: 0.5px;
+        }
     </style>
     
     <!-- Meta Pixel Code -->
@@ -341,42 +357,9 @@
                             <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú thêm (không bắt buộc)">
                         </div>
                         
-                        <button class="btn-giant-submit" id="btnToStep3">Xác nhận & Thanh toán <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- STEP 3: Tóm tắt đơn hàng -->
-                <div class="step-content" id="step3">
-                    <div class="modal-header" style="align-items:center;">
-                        <button class="icon-btn" id="btnBackToStep2" style="color:var(--text-main); background:none; border:none; font-size:20px; padding:0 10px;"><i class="fas fa-arrow-left"></i></button>
-                        <h3 style="margin:0; flex:1; text-align:center; font-size:18px;">Xác nhận đơn hàng</h3>
-                    </div>
-                    
-                    <div class="modal-body">
-                        <div class="confirm-summary">
-                            <p><strong>Sản phẩm:</strong> <span id="confProduct"></span></p>
-                            <p><strong>Số lượng:</strong> <span id="confQty"></span></p>
-                            <p><strong>Người nhận:</strong> <span id="confName"></span> - <span id="confPhone"></span></p>
-                            <p><strong>Địa chỉ:</strong> <span id="confAddress"></span></p>
-                            <p><strong>Ghi chú:</strong> <span id="confNote"></span></p>
-                            
-                            <div class="price-summary-box" style="margin-top: 15px;">
-                                <div class="summary-row">
-                                    <span>Tạm tính:</span>
-                                    <span>₫<span id="confSubTotal"></span></span>
-                                </div>
-                                <div class="summary-row text-highlight">
-                                    <span>Phí vận chuyển:</span>
-                                    <span id="confShipping">0đ (Miễn phí)</span>
-                                </div>
-                                <div class="summary-row total-row">
-                                    <span>TỔNG CỘNG:</span>
-                                    <span class="total-amount">₫<span id="confTotal"></span></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="btn-giant-submit" id="btnSubmitOrder" style="background:var(--primary-color);">CHỐT ĐƠN HÀNG</button>
+                        <button class="btn-giant-submit pulse-btn" id="btnSubmitOrder" style="background:var(--primary-color); margin-top: 10px; font-size: 17px;">
+                            <i class="fas fa-check-circle"></i> XÁC NHẬN CHỐT ĐƠN NGAY
+                        </button>
                     </div>
                 </div>
             </div>
