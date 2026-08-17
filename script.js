@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cusAddressDetail = document.getElementById('cusAddressDetail');
     const cusNote = document.getElementById('cusNote');
     
-    const cusProvince = document.getElementById('cusProvince');
-    const cusDistrict = document.getElementById('cusDistrict');
-    const cusWard = document.getElementById('cusWard');
+    const cusLocationSearch = document.getElementById('cusLocationSearch');
+    const locationSuggestions = document.getElementById('locationSuggestions');
     
     // Modals & Steps
     const checkoutModal = document.getElementById('checkoutModal');
@@ -58,9 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedWeightText = '1 Hũ 700g';
     
     // Address data
-    let provincesData = [];
-    let districtsData = [];
-    let wardsData = [];
+    let allLocations = []; // Flattened list for quick search
     
     // ---- Utils ----
     const formatCurrency = (num) => {
@@ -270,10 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btnToStep3.addEventListener('click', () => {
             const name = cusName.value.trim();
             const phone = cusPhone.value.trim();
-            const pName = cusProvince.value.trim();
-            const dName = cusDistrict.value.trim();
-            const wName = cusWard.value.trim();
             const detail = cusAddressDetail.value.trim();
+            const location = cusLocationSearch.value.trim();
             const note = cusNote.value.trim() || 'Không có';
 
             if (!name) return showToast('Vui lòng nhập họ và tên!');
@@ -282,12 +277,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 phoneError.classList.add('show');
                 return showToast('Số điện thoại không hợp lệ!');
             }
-            if (!pName || !dName || !wName || !detail) {
+            if (!detail || !location) {
                 return showToast('Vui lòng nhập đầy đủ địa chỉ giao hàng!');
             }
 
             // Populate Summary
-            const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
+            const fullAddress = `${detail}, ${location}`;
             const productName = `${selectedWeightText}`;
             
             let shipFee = 25000;
@@ -379,26 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(localStorage.getItem('cusPhone')) cusPhone.value = localStorage.getItem('cusPhone');
         if(localStorage.getItem('cusAddressDetail')) cusAddressDetail.value = localStorage.getItem('cusAddressDetail');
         
-        const pName = localStorage.getItem('cusProvince');
-        if (pName) {
-            cusProvince.value = pName;
-            cusProvince.dispatchEvent(new Event('input'));
-            
-            setTimeout(() => {
-                const dName = localStorage.getItem('cusDistrict');
-                if (dName) {
-                    cusDistrict.value = dName;
-                    cusDistrict.dispatchEvent(new Event('input'));
-                    
-                    setTimeout(() => {
-                        const wName = localStorage.getItem('cusWard');
-                        if (wName) {
-                            cusWard.value = wName;
-                        }
-                    }, 50);
-                }
-            }, 50);
-        }
+        if(localStorage.getItem('cusLocationSearch')) cusLocationSearch.value = localStorage.getItem('cusLocationSearch');
         if(localStorage.getItem('cusNote')) cusNote.value = localStorage.getItem('cusNote');
     };
 
@@ -407,9 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { el: cusName, key: 'cusName' },
         { el: cusPhone, key: 'cusPhone' },
         { el: cusAddressDetail, key: 'cusAddressDetail' },
-        { el: cusProvince, key: 'cusProvince' },
-        { el: cusDistrict, key: 'cusDistrict' },
-        { el: cusWard, key: 'cusWard' },
+        { el: cusLocationSearch, key: 'cusLocationSearch' },
         { el: cusNote, key: 'cusNote' }
     ];
     inputsToAutoSave.forEach(item => {
@@ -420,82 +394,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    let selectedProvinceCode = null;
-    let selectedDistrictCode = null;
-
     fetch('https://provinces.open-api.vn/api/?depth=3')
         .then(response => response.json())
         .then(data => {
-            provincesData = data;
-            const pList = document.getElementById('provinceList');
-            if(pList) {
-                provincesData.forEach(p => {
-                    const opt = document.createElement('option');
-                    opt.value = p.name;
-                    opt.setAttribute('data-code', p.code);
-                    pList.appendChild(opt);
+            data.forEach(province => {
+                const pName = province.name;
+                (province.districts || []).forEach(district => {
+                    const dName = district.name;
+                    (district.wards || []).forEach(ward => {
+                        const wName = ward.name;
+                        allLocations.push(`${wName}, ${dName}, ${pName}`);
+                    });
                 });
-            }
+            });
             loadSavedCustomerData();
         })
         .catch(err => console.error("Error fetching address API", err));
 
-    if (cusProvince) {
-        cusProvince.addEventListener('input', (e) => {
-            const pName = e.target.value;
-            const pList = document.getElementById('provinceList');
-            const option = Array.from(pList.options).find(opt => opt.value === pName);
-            
-            const dList = document.getElementById('districtList');
-            const wList = document.getElementById('wardList');
-            dList.innerHTML = '';
-            wList.innerHTML = '';
-            cusDistrict.value = '';
-            cusWard.value = '';
-            cusWard.disabled = true;
+    const removeAccents = (str) => {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    };
 
-            if (option) {
-                selectedProvinceCode = option.getAttribute('data-code');
-                const province = provincesData.find(p => p.code == selectedProvinceCode);
-                districtsData = province.districts || [];
-                districtsData.forEach(d => {
-                    const opt = document.createElement('option');
-                    opt.value = d.name;
-                    opt.setAttribute('data-code', d.code);
-                    dList.appendChild(opt);
+    if (cusLocationSearch && locationSuggestions) {
+        cusLocationSearch.addEventListener('input', function() {
+            const val = this.value.trim();
+            if (val.length < 5) {
+                locationSuggestions.style.display = 'none';
+                return;
+            }
+            
+            // Tự động dịch một số từ viết tắt phổ biến
+            let cleanVal = val.toLowerCase()
+                .replace(/\bq(\d+)\b/g, 'quan $1') // q1 -> quan 1
+                .replace(/\bp(\d+)\b/g, 'phuong $1') // p2 -> phuong 2
+                .replace(/\btp\b/g, 'thanh pho')
+                .replace(/\bhcm\b/g, 'ho chi minh')
+                .replace(/\bhn\b/g, 'ha noi');
+
+            const searchTerms = removeAccents(cleanVal).split(' ').filter(t => t);
+            
+            const matches = allLocations.filter(loc => {
+                const locNormalized = removeAccents(loc);
+                return searchTerms.every(term => {
+                    // Chỉ khớp các từ bắt đầu bằng term (tránh vụ 'an' dính vào 'hoàn kiếm')
+                    const regex = new RegExp('\\b' + term, 'i');
+                    return regex.test(locNormalized);
                 });
-                cusDistrict.disabled = false;
+            }).slice(0, 15);
+            
+            if (matches.length > 0) {
+                locationSuggestions.innerHTML = matches.map(match => {
+                    const parts = match.split(', ');
+                    return `<div class="suggestion-item">
+                        <strong style="color:var(--primary-color);">${parts[0]}</strong>, ${parts[1]}, ${parts[2]}
+                    </div>`;
+                }).join('');
+                locationSuggestions.style.display = 'block';
             } else {
-                selectedProvinceCode = null;
-                cusDistrict.disabled = true;
+                locationSuggestions.innerHTML = '<div class="suggestion-item" style="color:#999; text-align:center;">Không tìm thấy kết quả phù hợp</div>';
+                locationSuggestions.style.display = 'block';
             }
         });
-    }
 
-    if (cusDistrict) {
-        cusDistrict.addEventListener('input', (e) => {
-            const dName = e.target.value;
-            const dList = document.getElementById('districtList');
-            const option = Array.from(dList.options).find(opt => opt.value === dName);
-            
-            const wList = document.getElementById('wardList');
-            wList.innerHTML = '';
-            cusWard.value = '';
+        locationSuggestions.addEventListener('click', function(e) {
+            const item = e.target.closest('.suggestion-item');
+            if (item && !item.textContent.includes('Không tìm thấy')) {
+                cusLocationSearch.value = item.textContent.replace(/\n/g, '').replace(/\s+/g, ' ').trim();
+                locationSuggestions.style.display = 'none';
+                localStorage.setItem('cusLocationSearch', cusLocationSearch.value);
+            }
+        });
 
-            if (option) {
-                selectedDistrictCode = option.getAttribute('data-code');
-                const district = districtsData.find(d => d.code == selectedDistrictCode);
-                wardsData = district.wards || [];
-                wardsData.forEach(w => {
-                    const opt = document.createElement('option');
-                    opt.value = w.name;
-                    opt.setAttribute('data-code', w.code);
-                    wList.appendChild(opt);
-                });
-                cusWard.disabled = false;
-            } else {
-                selectedDistrictCode = null;
-                cusWard.disabled = true;
+        document.addEventListener('click', function(e) {
+            if (e.target !== cusLocationSearch && !locationSuggestions.contains(e.target)) {
+                locationSuggestions.style.display = 'none';
             }
         });
     }
@@ -505,13 +477,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSubmitOrder.addEventListener('click', () => {
             const name = cusName.value.trim();
             const phone = cusPhone.value.trim();
-            const pName = cusProvince.value.trim();
-            const dName = cusDistrict.value.trim();
-            const wName = cusWard.value.trim();
             const detail = cusAddressDetail.value.trim();
+            const location = cusLocationSearch.value.trim();
             const note = cusNote.value.trim() || 'Không có';
 
-            const fullAddress = `${detail}, ${wName}, ${dName}, ${pName}`;
+            const fullAddress = `${detail}, ${location}`;
             const productName = `${selectedWeightText}`;
             
             let shipFee = 25000;
@@ -554,9 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Save info to localStorage for next time
                     localStorage.setItem('cusName', name);
                     localStorage.setItem('cusPhone', phone);
-                    localStorage.setItem('cusProvince', pName);
-                    localStorage.setItem('cusDistrict', dName);
-                    localStorage.setItem('cusWard', wName);
+                    localStorage.setItem('cusLocationSearch', location);
                     localStorage.setItem('cusAddressDetail', detail);
 
                     checkoutModal.classList.remove('active');

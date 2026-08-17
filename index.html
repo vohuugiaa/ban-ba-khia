@@ -9,6 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .suggestions-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .suggestion-item {
+            padding: 12px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            color: #333;
+            transition: background 0.2s;
+        }
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        .suggestion-item:active {
+            background: #f0fdf4;
+        }
+    </style>
     
     <!-- Meta Pixel Code -->
     <script>
@@ -300,20 +329,13 @@
                             <div class="error-msg" id="phoneError">Số điện thoại không hợp lệ (10 số, bắt đầu 03/05/07/08/09)</div>
                         </div>
                         
-                        <!-- API Address Selectors (Autocomplete) -->
-                        <div class="form-group address-group">
-                            <input type="text" id="cusProvince" list="provinceList" class="form-input" placeholder="Gõ để chọn Tỉnh/Thành phố..." required autocomplete="off">
-                            <datalist id="provinceList"></datalist>
-                            
-                            <input type="text" id="cusDistrict" list="districtList" class="form-input" placeholder="Gõ để chọn Quận/Huyện..." required disabled autocomplete="off">
-                            <datalist id="districtList"></datalist>
-                            
-                            <input type="text" id="cusWard" list="wardList" class="form-input" placeholder="Gõ để chọn Phường/Xã..." required disabled autocomplete="off">
-                            <datalist id="wardList"></datalist>
-                        </div>
-
+                        <!-- Smart Address Autocomplete -->
                         <div class="form-group">
-                            <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường chi tiết..." required>
+                            <input type="text" id="cusAddressDetail" class="form-input" placeholder="Số nhà, tên đường (VD: 123 Lê Lợi)" required>
+                        </div>
+                        <div class="form-group" style="position: relative;">
+                            <input type="text" id="cusLocationSearch" class="form-input" placeholder="Gõ tên Phường/Xã hoặc Quận/Huyện để tìm..." required autocomplete="off">
+                            <div id="locationSuggestions" class="suggestions-box" style="display: none;"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" id="cusNote" class="form-input" placeholder="Ghi chú thêm (không bắt buộc)">
